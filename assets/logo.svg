@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mozumder mark">
+  <rect width="64" height="64" rx="12" fill="#0a1f4d"/>
+  <path d="M12 48 V20 h7 l7 13 7-13 h7 v28 h-6 V30 l-7 13 h-2 l-7-13 v18 z" fill="#f4a83c"/>
+  <path d="M50 48 L50 40 L56 48 Z" fill="#f4a83c"/>
+</svg>
