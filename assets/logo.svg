@@ -1,32 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 440" role="img" aria-label="Mozumder">
-  <!-- Outer red frame -->
-  <rect x="6" y="6" width="388" height="428" fill="#ffffff" stroke="#c8102e" stroke-width="6"/>
-  <!-- Inner navy frame -->
-  <rect x="22" y="22" width="356" height="396" fill="none" stroke="#0a2352" stroke-width="3"/>
+  
+  <rect x="6" y="6" width="388" height="428" fill="#ffffff" stroke="#c8102e" stroke-width="6"></rect>
+  
+  <rect x="22" y="22" width="356" height="396" fill="none" stroke="#0a2352" stroke-width="3"></rect>
 
-  <!-- Navy "M" (left-aligned, behind) -->
-  <path d="M70 310 L70 100 L104 100 L160 200 L160 310 L132 310 L132 155 L108 200 L90 170 L90 310 Z"
-        fill="#0a2352"/>
+  
+  <path d="M70 310 L70 100 L104 100 L160 200 L160 310 L132 310 L132 155 L108 200 L90 170 L90 310 Z" fill="#0a2352"></path>
 
-  <!-- Navy swoosh -->
-  <path d="M50 280 Q160 345 280 275 Q330 245 368 195 L346 182 Q314 222 274 248 Q180 300 75 255 Z"
-        fill="#0a2352"/>
+  
+  <path d="M50 280 Q160 345 280 275 Q330 245 368 195 L346 182 Q314 222 274 248 Q180 300 75 255 Z" fill="#0a2352"></path>
 
-  <!-- Red angular "M" (two sharp triangular peaks) -->
+  
   <g fill="#e11920">
-    <path d="M110 310 L110 100 L148 100 L210 230 L178 260 L148 170 L148 310 Z"/>
-    <path d="M210 230 L272 100 L310 100 L310 310 L272 310 L272 170 L242 260 Z"/>
+    <path d="M110 310 L110 100 L148 100 L210 230 L178 260 L148 170 L148 310 Z"></path>
+    <path d="M210 230 L272 100 L310 100 L310 310 L272 310 L272 170 L242 260 Z"></path>
   </g>
 
-  <!-- Red peak highlight lines -->
-  <path d="M148 100 L210 230 L182 100 Z" fill="#c8102e" opacity="0.85"/>
-  <path d="M272 100 L210 230 L238 100 Z" fill="#c8102e" opacity="0.85"/>
+  
+  <path d="M148 100 L210 230 L182 100 Z" fill="#c8102e" opacity="0.85"></path>
+  <path d="M272 100 L210 230 L238 100 Z" fill="#c8102e" opacity="0.85"></path>
 
-  <!-- Swoosh tail tip (navy) -->
-  <path d="M312 240 Q346 218 368 195 L346 182 Q330 212 304 228 Z" fill="#0a2352"/>
+  
+  <path d="M312 240 Q346 218 368 195 L346 182 Q330 212 304 228 Z" fill="#0a2352"></path>
 
-  <!-- MOZUMDER wordmark -->
-  <text x="200" y="395" text-anchor="middle"
-        font-family="Arial Black, Helvetica, sans-serif"
-        font-weight="900" font-size="42" fill="#1e2a8a" letter-spacing="2">MOZUMDER</text>
+  
+  <text x="200" y="395" text-anchor="middle" font-family="Arial Black, Helvetica, sans-serif" font-weight="900" font-size="42" fill="#1e2a8a" letter-spacing="2">MOZUMDER</text>
 </svg>

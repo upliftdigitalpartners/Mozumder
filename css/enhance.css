@@ -1,0 +1,504 @@
+/* =========================================================
+   Mozumder — Enhancements layer (loaded after main.css)
+   Focus: richer hero, better motion, partner logos, polish.
+   ========================================================= */
+
+/* ---------- BRAND MARK: swap hand-drawn SVG for real logo image ---------- */
+.brand .mark {
+  width: 48px; height: 48px;
+  padding: 0;
+  border: none;
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 6px 16px -10px rgba(10,31,77,.35);
+  overflow: hidden;
+}
+.brand .mark img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.site-header.is-solid .brand .mark { box-shadow: 0 4px 14px -10px rgba(10,31,77,.3); }
+.site-footer .brand .mark { background: #fff; }
+
+/* ---------- Global motion polish ---------- */
+:root {
+  --ease-out-quart: cubic-bezier(.25,1,.5,1);
+  --ease-in-out-quart: cubic-bezier(.76,0,.24,1);
+  --grain-url: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.7'/></svg>");
+}
+
+/* Gentle parallax helpers (scroll-driven where supported) */
+@supports (animation-timeline: scroll()) {
+  .parallax-slow { animation: parallax-y linear both; animation-timeline: scroll(); animation-range: 0 100vh; }
+  @keyframes parallax-y { to { transform: translate3d(0, -60px, 0); } }
+}
+
+/* Smooth anchor-linked scrolling with a nicer curve */
+html { scroll-behavior: smooth; }
+
+/* ---------- HERO: richer composition ---------- */
+/* Darken & add depth to the hotlinked photo, plus subtle grain */
+.hero {
+  background: #050e26;
+}
+.hero::before {
+  background:
+    radial-gradient(1200px 700px at 80% -10%, rgba(244,168,60,.28), transparent 65%),
+    radial-gradient(900px 600px at -10% 110%, rgba(34,73,160,.55), transparent 60%),
+    linear-gradient(180deg, #050e26 0%, #0a1f4d 55%, #05102b 100%);
+}
+.hero-img-layer {
+  opacity: .22;
+  mix-blend-mode: screen;
+  filter: saturate(.5) contrast(1.05) brightness(.9);
+  transform: scale(1.05);
+  transition: transform 1.4s var(--ease-out-quart), opacity 1.4s var(--ease-out-quart);
+}
+/* Subtle zoom-in on first paint */
+body.is-ready .hero-img-layer { transform: scale(1); }
+
+/* Ambient grain for the hero */
+.hero::after {
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px),
+    var(--grain-url);
+  background-size: 48px 48px, 48px 48px, 140px 140px;
+  opacity: .9;
+}
+
+/* Hero H1 — staggered line reveal */
+.hero h1 {
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+.hero h1 .line {
+  display: block;
+  overflow: hidden;
+}
+.hero h1 .line > span {
+  display: inline-block;
+  transform: translateY(115%);
+  opacity: 0;
+  animation: h1-rise .95s var(--ease-out-quart) forwards;
+}
+.hero h1 .line:nth-child(1) > span { animation-delay: .15s; }
+.hero h1 .line:nth-child(2) > span { animation-delay: .30s; }
+.hero h1 .line:nth-child(3) > span { animation-delay: .45s; }
+@keyframes h1-rise { to { transform: none; opacity: 1; } }
+
+/* Accent underline sweep */
+.hero h1 .accent {
+  position: relative;
+  color: var(--gold-bright);
+  white-space: nowrap;
+}
+.hero h1 .accent::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: -.08em; height: .08em;
+  background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: accent-underline 1s var(--ease-out-quart) .95s forwards;
+  border-radius: 4px;
+}
+@keyframes accent-underline { to { transform: scaleX(1); } }
+
+/* Eyebrow with ticker dot */
+.hero .eyebrow {
+  backdrop-filter: blur(6px);
+  background: rgba(255,255,255,.05);
+  padding: 6px 14px 6px 10px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 999px;
+}
+.hero .eyebrow::before {
+  width: 6px; height: 6px; border-radius: 999px;
+  background: var(--gold-bright);
+  box-shadow: 0 0 0 0 rgba(244,168,60,.45);
+  animation: eb-pulse 1.8s ease-in-out infinite;
+}
+@keyframes eb-pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(244,168,60,.45); }
+  50%     { box-shadow: 0 0 0 6px rgba(244,168,60,0); }
+}
+
+/* CTAs: lift + glow */
+.btn-primary {
+  box-shadow: 0 10px 30px -12px rgba(244,168,60,.55), 0 1px 2px rgba(10,31,77,.2);
+}
+.btn-primary:hover {
+  box-shadow: 0 18px 40px -14px rgba(244,168,60,.7), 0 3px 6px rgba(10,31,77,.22);
+}
+.btn-ghost {
+  background: rgba(255,255,255,.04);
+  border-color: rgba(255,255,255,.2);
+  backdrop-filter: blur(6px);
+}
+.btn-ghost:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.5); }
+
+/* Hero stats — tabular + divider animation */
+.hero-meta .stat .num { font-variant-numeric: tabular-nums; }
+.hero-meta {
+  position: relative;
+}
+.hero-meta::after {
+  content: ""; position: absolute; left: 0; top: 0; height: 1px;
+  width: 0; background: linear-gradient(90deg, var(--gold-bright), transparent);
+  animation: divider-sweep 1.6s var(--ease-out-quart) 1.1s forwards;
+}
+@keyframes divider-sweep { to { width: 60%; } }
+
+/* ---------- HERO VISUAL PANEL: dial down cartoon, add depth ---------- */
+.hero-visual {
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(244,168,60,.18), transparent 55%),
+    linear-gradient(180deg, #0a2352 0%, #0d2963 40%, #112e72 100%);
+  border: 1px solid rgba(255,255,255,.08);
+}
+.hero-visual::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: var(--grain-url);
+  opacity: .35; mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Drop the stars + sun noise — replaced with single horizon glow */
+.shipping-scene .stars { opacity: .35; animation-duration: 8s; }
+.shipping-scene .sun {
+  right: 14%; top: 18%;
+  width: 140px; height: 140px;
+  background: radial-gradient(circle, rgba(255,210,130,.8) 0%, rgba(244,168,60,.3) 35%, transparent 65%);
+  filter: blur(2px);
+  animation: sun-drift 12s ease-in-out infinite alternate;
+}
+@keyframes sun-drift {
+  0%   { transform: translate(0, 0) scale(1); opacity: .85; }
+  100% { transform: translate(-14px, 6px) scale(1.05); opacity: 1; }
+}
+
+/* Ocean: add subtle caustic shimmer */
+.shipping-scene .ocean {
+  background:
+    linear-gradient(180deg, rgba(244,168,60,.08) 0%, transparent 20%),
+    linear-gradient(180deg, #0a2352 0%, #050e26 100%);
+}
+.shipping-scene .ocean::after {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    radial-gradient(1.5px 1px at 20% 40%, rgba(255,210,130,.4), transparent 60%),
+    radial-gradient(1.5px 1px at 60% 60%, rgba(255,210,130,.3), transparent 60%),
+    radial-gradient(1.5px 1px at 80% 30%, rgba(255,210,130,.3), transparent 60%);
+  animation: shimmer 5s ease-in-out infinite alternate;
+}
+@keyframes shimmer { from { opacity: .4; } to { opacity: 1; } }
+
+/* Ship: bob gently as it crosses */
+.shipping-scene .ship {
+  animation: ship-sail 26s linear infinite, ship-bob 3.5s ease-in-out infinite;
+}
+@keyframes ship-bob { 0%,100% { margin-top: 0; } 50% { margin-top: 4px; } }
+
+/* Truck: tighten drive curve */
+.shipping-scene .truck {
+  animation: truck-drive 14s cubic-bezier(.32,.02,.6,1) infinite;
+}
+
+/* Scene tag — richer glass */
+.shipping-scene .tag {
+  background: rgba(8,20,50,.55);
+  border-color: rgba(255,255,255,.18);
+  font-weight: 600; letter-spacing: .02em;
+  padding: 8px 14px 8px 12px;
+}
+
+.shipping-scene .caption .t { font-size: 1.5rem; }
+
+/* Floating data badges — NEW credibility overlays */
+.hero-visual .chip {
+  position: absolute; z-index: 3;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: rgba(8,20,50,.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.14);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 600; font-size: .82rem; letter-spacing: .01em;
+  box-shadow: 0 10px 30px -12px rgba(0,0,0,.5);
+  animation: chip-float 6s ease-in-out infinite;
+}
+.hero-visual .chip .d {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  display: grid; place-items: center; color: var(--ink-deep);
+  flex: none;
+}
+.hero-visual .chip .d svg { width: 16px; height: 16px; }
+.hero-visual .chip .k { display: block; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.6); font-weight: 700; }
+.hero-visual .chip .v { display: block; font-size: 1rem; font-weight: 800; }
+.hero-visual .chip.c1 { top: 22%; right: 6%; animation-delay: 0s; }
+.hero-visual .chip.c2 { top: 46%; left: 6%; animation-delay: 1.2s; }
+@keyframes chip-float {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-8px); }
+}
+
+/* ---------- PARTNERS MARQUEE: use real logos ---------- */
+.marquee { padding: 36px 0; }
+.marquee-track { gap: 72px; animation-duration: 55s; }
+.marquee-item {
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.marquee-logo {
+  height: 42px; width: auto; max-width: 150px;
+  object-fit: contain;
+  filter: grayscale(100%) contrast(.9) brightness(.5);
+  opacity: .7;
+  transition: filter .35s var(--ease-out-quart), opacity .35s var(--ease-out-quart);
+}
+.marquee-item:hover .marquee-logo {
+  filter: none;
+  opacity: 1;
+}
+
+/* ---------- SERVICES: richer cards ---------- */
+.service-card {
+  transition: transform .45s var(--ease-out-quart), box-shadow .45s var(--ease-out-quart),
+              border-color .45s var(--ease-out-quart), background .45s var(--ease-out-quart);
+}
+.service-card::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(320px 180px at var(--mx,50%) var(--my,0%), rgba(244,168,60,.22), transparent 65%);
+  opacity: 0; transition: opacity .4s var(--ease-out-quart);
+}
+.service-card:hover::before { opacity: 1; }
+.service-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px -24px rgba(10,31,77,.4); }
+
+/* Accent corner notch */
+.service-card::after {
+  background: linear-gradient(135deg, var(--ink-deep) 0%, #122c6d 60%, var(--ink) 100%);
+}
+
+/* Icon: animate on hover */
+.svc-icon { transition: transform .5s var(--ease-out-quart), color .3s var(--ease-out-quart); }
+.service-card:hover .svc-icon { transform: translateY(-2px) rotate(-4deg); }
+
+.svc-arrow { transition: transform .35s var(--ease-out-quart), background .3s, color .3s, border-color .3s; }
+.service-card:hover .svc-arrow { transform: translateX(4px); }
+
+/* Featured card: subtle animated gradient */
+.service-card.featured {
+  background:
+    linear-gradient(135deg, #061638 0%, #0a1f4d 50%, #13306b 100%);
+  position: relative;
+  overflow: hidden;
+}
+.service-card.featured::before {
+  content: "";
+  position: absolute; inset: -50%; z-index: 0;
+  background: conic-gradient(from 180deg at 50% 50%, transparent 0deg, rgba(244,168,60,.18) 60deg, transparent 120deg, transparent 360deg);
+  animation: featured-spin 18s linear infinite;
+  opacity: .6;
+}
+.service-card.featured > * { position: relative; z-index: 1; }
+@keyframes featured-spin { to { transform: rotate(360deg); } }
+
+/* ---------- JOURNEY: smoother rhythm ---------- */
+.journey-track::before {
+  background: repeating-linear-gradient(90deg, rgba(244,168,60,.7) 0 12px, transparent 12px 26px);
+  animation-duration: 1.8s;
+}
+.journey-stop .orb {
+  transition: transform .4s var(--ease-out-quart);
+}
+.journey-stop:hover .orb { transform: scale(1.08); }
+
+.journey-mover { animation-duration: 16s; }
+
+/* ---------- STATS BAND: animated number shimmer ---------- */
+.stat-card {
+  position: relative;
+  padding: 24px 0 24px 24px;
+  border-left: 2px solid rgba(255,255,255,.14);
+  transition: border-color .3s var(--ease-out-quart);
+}
+.stat-card::before {
+  content: ""; position: absolute; left: -2px; top: 0; height: 0;
+  width: 2px; background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  transition: height .8s var(--ease-out-quart);
+}
+.stat-card.in::before { height: 100%; }
+.stat-card .num { font-variant-numeric: tabular-nums; }
+
+/* ---------- COVERAGE MAP: live lanes ---------- */
+.coverage {
+  background:
+    radial-gradient(80% 60% at 60% 40%, #fff 0%, #f7f5f0 60%, #eef2f8 100%);
+}
+.coverage svg.bd-map path[fill] {
+  filter: drop-shadow(0 6px 20px rgba(10,31,77,.15));
+}
+
+/* Dashed routes connecting hubs */
+.coverage::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(42deg, transparent 48%, rgba(244,168,60,.55) 48%, rgba(244,168,60,.55) 49%, transparent 49%),
+    linear-gradient(-68deg, transparent 48%, rgba(244,168,60,.4) 48%, rgba(244,168,60,.4) 49%, transparent 49%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pin {
+  background: var(--gold);
+  box-shadow: 0 0 0 0 rgba(244,168,60,.6), 0 4px 10px rgba(10,31,77,.25);
+}
+.pin.lg::after {
+  content: ""; position: absolute; inset: -6px;
+  border-radius: 999px; border: 1.5px dashed rgba(244,168,60,.6);
+  animation: pin-ring 6s linear infinite;
+}
+@keyframes pin-ring { to { transform: rotate(360deg); } }
+.pin-label {
+  font-size: .78rem; padding: 3px 9px;
+  border: 1px solid rgba(10,31,77,.08);
+  box-shadow: 0 6px 18px -8px rgba(10,31,77,.25);
+}
+
+/* ---------- CONCERNS: depth & active state ---------- */
+.concern-card {
+  transition: transform .4s var(--ease-out-quart), box-shadow .4s var(--ease-out-quart), border-color .4s var(--ease-out-quart);
+}
+.concern-card::after {
+  content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 3px;
+  background: linear-gradient(180deg, var(--gold), var(--gold-dark));
+  transform: scaleY(0); transform-origin: top center;
+  transition: transform .45s var(--ease-out-quart);
+  border-radius: 3px;
+}
+.concern-card:hover { transform: translateY(-6px); box-shadow: 0 26px 52px -24px rgba(10,31,77,.3); }
+.concern-card:hover::after { transform: scaleY(1); }
+.concern-card.featured:hover::after { transform: none; }
+
+/* ---------- WHY MOZUMDER: icon container refinement ---------- */
+.why-card {
+  transition: transform .4s var(--ease-out-quart), box-shadow .4s var(--ease-out-quart), border-color .4s var(--ease-out-quart);
+}
+.why-card .ic {
+  background: linear-gradient(135deg, rgba(244,168,60,.22), rgba(244,168,60,.05));
+  border: 1px solid rgba(244,168,60,.25);
+  transition: transform .4s var(--ease-out-quart), background .3s;
+}
+.why-card:hover .ic {
+  transform: rotate(-4deg) scale(1.05);
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  border-color: transparent;
+  color: var(--white);
+}
+.why-card:hover .ic svg { color: var(--ink-deep); }
+
+/* ---------- CTA BAND: subtle aurora ---------- */
+.cta-band::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(400px 220px at -10% 120%, rgba(91,140,255,.2), transparent 60%),
+    radial-gradient(500px 260px at 110% 0%, rgba(244,168,60,.2), transparent 60%);
+  pointer-events: none;
+}
+
+/* ---------- MARQUEE refinement ---------- */
+.marquee::before, .marquee::after { width: 160px; }
+
+/* ---------- SECTION headers: eyebrow flourish ---------- */
+.section-head .eyebrow::before { width: 32px; }
+
+/* ---------- LINKS: underline sweep ---------- */
+.site-footer ul a { position: relative; }
+.site-footer ul a:hover { color: var(--gold-bright); }
+
+/* ---------- Reveal: upgrade motion ---------- */
+.reveal {
+  transform: translateY(28px) scale(.985);
+  filter: blur(2px);
+  transition:
+    opacity .85s var(--ease-out-quart),
+    transform .85s var(--ease-out-quart),
+    filter .6s var(--ease-out-quart);
+}
+.reveal.in { transform: none; filter: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { filter: none; }
+  .hero h1 .line > span { animation: none; transform: none; opacity: 1; }
+  .hero h1 .accent::after { animation: none; transform: scaleX(1); }
+  .hero-meta::after { animation: none; width: 60%; }
+  .hero-visual .chip { animation: none; }
+  .shipping-scene .sun, .shipping-scene .ocean::before, .shipping-scene .ocean::after { animation: none; }
+}
+
+/* ---------- Nav: active underline spring ---------- */
+.nav-menu a { transition: color .25s var(--ease-out-quart), background .25s var(--ease-out-quart); }
+.nav-menu a::after {
+  content: ""; position: absolute; left: 14px; right: 14px; bottom: 4px;
+  height: 2px; background: var(--gold); border-radius: 2px;
+  transform: scaleX(0); transform-origin: left center;
+  transition: transform .35s var(--ease-out-quart);
+}
+.nav-menu a:hover::after { transform: scaleX(1); }
+.nav-menu a.active::after { transform: scaleX(1); }
+
+/* ---------- Cursor trails (subtle — only the hero) ---------- */
+.hero-visual { cursor: crosshair; }
+
+/* ---------- Better mobile marquee ---------- */
+@media (max-width: 720px) {
+  .marquee-logo { height: 32px; }
+  .marquee-track { gap: 44px; }
+}
+
+/* ---------- Tweaks panel ---------- */
+.tweaks-panel {
+  position: fixed; right: 18px; bottom: 18px; z-index: 90;
+  width: 280px; padding: 16px;
+  background: rgba(6,22,56,.95); backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px;
+  color: var(--white);
+  font-family: var(--font-display);
+  box-shadow: 0 30px 60px -24px rgba(0,0,0,.5);
+  display: none;
+}
+.tweaks-panel.on { display: block; }
+.tweaks-panel h5 {
+  margin: 0 0 10px; font-size: .78rem; letter-spacing: .2em;
+  color: var(--gold-bright); text-transform: uppercase;
+}
+.tweaks-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 0; gap: 10px;
+  font-size: .85rem;
+}
+.tweaks-row .seg { display: flex; gap: 4px; background: rgba(255,255,255,.06); border-radius: 999px; padding: 3px; }
+.tweaks-row .seg button {
+  padding: 4px 10px; font-size: .72rem; border-radius: 999px; color: rgba(255,255,255,.7);
+  font-weight: 600; letter-spacing: .04em;
+}
+.tweaks-row .seg button.on { background: var(--gold); color: var(--ink-deep); }
+.tweaks-row input[type="color"] { width: 36px; height: 28px; border-radius: 8px; border: 1px solid rgba(255,255,255,.15); background: transparent; }
+
+/* Accent override hook */
+body[data-accent="red"] {
+  --gold: #e11920;
+  --gold-bright: #ff3a42;
+  --gold-dark: #a40e14;
+}
+body[data-accent="teal"] {
+  --gold: #17b8a6;
+  --gold-bright: #2cd4c0;
+  --gold-dark: #0d8577;
+}

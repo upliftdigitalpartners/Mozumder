@@ -6,17 +6,61 @@
   <title>Mozumder Company — Streamlined Logistics, Accelerated Growth</title>
   <meta name="description" content="Mozumder Company is Bangladesh's trusted logistics and transportation enterprise. Transportation, customs clearing, warehousing, corporate supply, sea & air freight." />
   <meta name="theme-color" content="#0a1f4d" />
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="icon" type="image/png" href="assets/logo-mark.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/enhance.css" />
+  <link rel="stylesheet" href="css/enhance-v2.css" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="Mozumder Company — Streamlined Logistics, Accelerated Growth" />
   <meta property="og:description" content="Bangladesh's trusted logistics partner since 2008. Fleet, freight, forwarding & corporate supply." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.mozumderbd.net/" />
+  <meta property="og:image" content="https://www.mozumderbd.net/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Mozumder Company — Streamlined Logistics, Accelerated Growth" />
+  <meta name="twitter:description" content="Bangladesh's trusted logistics partner since 2008." />
+  <meta name="twitter:image" content="https://www.mozumderbd.net/assets/og-image.png" />
+
+  <!-- Structured data: LocalBusiness + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://www.mozumderbd.net/#org",
+    "name": "Mozumder Company",
+    "url": "https://www.mozumderbd.net/",
+    "logo": "https://www.mozumderbd.net/assets/logo-mark.png",
+    "image": "https://www.mozumderbd.net/assets/og-image.png",
+    "description": "Bangladesh's trusted logistics partner — transportation, freight forwarding, customs clearing, warehousing, heavy equipment and corporate supply. Serving all 64 districts since 2008.",
+    "foundingDate": "2008",
+    "areaServed": { "@type": "Country", "name": "Bangladesh" },
+    "telephone": "+880-1979-628953",
+    "email": "info@mozumderbd.net",
+    "address": [
+      {
+        "@type": "PostalAddress",
+        "streetAddress": "K.R. Complex (3rd Floor), Gate No-09, Block-K, PC Road, Halishahar",
+        "addressLocality": "Chattogram",
+        "addressCountry": "BD"
+      },
+      {
+        "@type": "PostalAddress",
+        "streetAddress": "42, Jabbar Tower (3rd Floor), Gulshan Avenue, Gulshan-1",
+        "addressLocality": "Dhaka",
+        "postalCode": "1212",
+        "addressCountry": "BD"
+      }
+    ],
+    "sameAs": []
+  }
+  </script>
 </head>
 <body>
 
@@ -24,9 +68,7 @@
 <header class="site-header" role="banner">
   <div class="container nav">
     <a class="brand" href="index.html" aria-label="Mozumder Company home">
-      <span class="mark" aria-hidden="true">
-        <svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true"><path d="M4 44 Q30 60 56 42 Q62 37 62 33 L55 31 Q50 37 43 41 Q26 49 6 40 Z" fill="#0a2352"/><path d="M11 54 L11 8 L18 8 L32 34 L27 42 L22 26 L22 54 Z" fill="#e11920"/><path d="M32 34 L46 8 L53 8 L53 54 L46 54 L46 26 L41 42 Z" fill="#e11920"/></svg>
-      </span>
+      <span class="mark" aria-hidden="true"><img src="assets/logo-mark.png" alt=""/></span>
       <span>
         Mozumder
         <small>Company</small>
@@ -34,19 +76,21 @@
     </a>
 
     <nav class="nav-menu" aria-label="Primary">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="services.html">Services</a>
-      <a href="fleet.html">Fleet</a>
-      <a href="sister-concerns.html">Sister Concerns</a>
-      <a href="partners.html">Partners</a>
-      <a href="contact.html">Contact</a>
+      <a href="index.html" data-i18n="nav.home">Home</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <a href="services.html" data-i18n="nav.services">Services</a>
+      <a href="fleet.html" data-i18n="nav.fleet">Fleet</a>
+      <a href="sister-concerns.html" data-i18n="nav.concerns">Sister Concerns</a>
+      <a href="partners.html" data-i18n="nav.partners">Partners</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
     </nav>
 
     <div class="nav-cta">
-      <a class="btn btn-dark" href="contact.html">
-        Get a Quote
-        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="en" class="on" aria-pressed="true">EN</button>
+        <button type="button" data-lang="bn" aria-pressed="false">বাং</button>
+      </div>
+      <a class="btn btn-dark" href="contact.html"><span data-i18n="cta.quote">Get a Quote</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
     </div>
@@ -59,33 +103,35 @@
   <div class="container">
     <div class="hero-inner">
       <div>
-        <span class="eyebrow light reveal">Streamlined Logistics, Accelerated Growth</span>
-        <h1 class="reveal delay-1 text-balance">
-          Moving Bangladesh&rsquo;s<br/>industry forward — <span class="accent">on time,</span> every time.
+        <span class="eyebrow light reveal" data-i18n="hero.eyebrow">Streamlined Logistics, Accelerated Growth</span>
+        <h1 class="text-balance">
+          <span class="line"><span data-i18n="hero.h1.l1">Moving Bangladesh&rsquo;s</span></span>
+          <span class="line"><span data-i18n="hero.h1.l2">industry forward &mdash;</span></span>
+          <span class="line"><span><span class="accent" data-i18n="hero.h1.l3.a">on time,</span> <span data-i18n="hero.h1.l3.b">every time.</span></span></span>
         </h1>
-        <p class="lead reveal delay-2">
+        <p class="lead reveal delay-2" data-i18n="hero.lead">
           Since 2008, Mozumder has delivered reliable transportation, freight forwarding, heavy equipment and corporate supply to the country&rsquo;s most demanding shippers. A diversified fleet, a disciplined team, a single commitment: your cargo, handled right.
         </p>
         <div class="hero-ctas reveal delay-3">
           <a class="btn btn-primary" href="services.html">
-            Explore Services
+            <span data-i18n="hero.cta.primary">Explore Services</span>
             <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
-          <a class="btn btn-ghost" href="contact.html">Talk to a Specialist</a>
+          <a class="btn btn-ghost" href="contact.html" data-i18n="hero.cta.secondary">Talk to a Specialist</a>
         </div>
 
         <div class="hero-meta reveal delay-4">
           <div class="stat">
             <div class="num"><span data-count="17" data-suffix="">0</span><span class="plus">+</span></div>
-            <div class="label">Years of Service</div>
+            <div class="label" data-i18n="stat.years">Years of Service</div>
           </div>
           <div class="stat">
             <div class="num"><span data-count="100" data-suffix="">0</span><span class="plus">+</span></div>
-            <div class="label">Industrial Clients</div>
+            <div class="label" data-i18n="stat.clients">Industrial Clients</div>
           </div>
           <div class="stat">
             <div class="num"><span data-count="6" data-suffix="">0</span></div>
-            <div class="label">Specialized Concerns</div>
+            <div class="label" data-i18n="stat.concerns">Specialized Concerns</div>
           </div>
         </div>
       </div>
@@ -191,6 +237,16 @@
             <g class="wheel" transform="translate(268 92)"><circle r="14" fill="#0a1220"/><circle r="6" fill="#555"/></g>
           </svg>
 
+          <!-- Floating data chips -->
+          <div class="chip c1" aria-hidden="true">
+            <span class="d"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h12V8H3z"/><path d="M15 11h4l2 3v3h-6"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg></span>
+            <span><span class="k">Fleet · active</span><span class="v">200+ vehicles</span></span>
+          </div>
+          <div class="chip c2" aria-hidden="true">
+            <span class="d"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18 L22 18 L20 21 L4 21 Z"/><path d="M5 18 V10 h14 V18"/></svg></span>
+            <span><span class="k">On-time rate</span><span class="v">98.4%</span></span>
+          </div>
+
           <!-- Live tag + caption overlay -->
           <span class="tag"><span class="dot"></span> Live Operations · Chattogram Port</span>
           <div class="caption">
@@ -206,47 +262,47 @@
 <!-- =========== PARTNERS MARQUEE =========== -->
 <div class="marquee" aria-label="Trusted by leading brands">
   <div class="marquee-track">
-    <span class="marquee-item">Arla</span>
-    <span class="marquee-item">Berger</span>
-    <span class="marquee-item">Marico</span>
-    <span class="marquee-item">DBL Group</span>
-    <span class="marquee-item">Linde</span>
-    <span class="marquee-item">Noman Group</span>
-    <span class="marquee-item">GPH ispat</span>
-    <span class="marquee-item">Prothom Alo</span>
-    <span class="marquee-item">Omera</span>
-    <span class="marquee-item">Partex Star</span>
-    <span class="marquee-item">KSRM</span>
-    <span class="marquee-item">Pacific Jeans</span>
-    <span class="marquee-item">The Daily Star</span>
-    <span class="marquee-item">Transcom Beverages</span>
-    <span class="marquee-item">SAAD Group</span>
-    <span class="marquee-item">Shanta</span>
-    <span class="marquee-item">Bengal Group</span>
-    <span class="marquee-item">Baizid Steel</span>
-    <span class="marquee-item">BD Food</span>
-    <span class="marquee-item">Japfa</span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/akubashir-group.png" alt="Akubashir Group" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/akg.png" alt="AKG" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/dbl.png" alt="DBL Group" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/linde.png" alt="Linde" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/omera.png" alt="Omera" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/ksrm.png" alt="KSRM" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/nasir-group.png" alt="Nasir Group" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/the-daily-star.png" alt="The Daily Star" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/experience-group.png" alt="Experience Group" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/transcom-beverages.png" alt="Transcom Beverages" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/ofs-cables.png" alt="OFS Cables" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/saad-group.png" alt="SAAD Group" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/arbab-group.png" alt="Arbab Group" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/shanta.png" alt="Shanta" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/bengal-group.png" alt="Bengal Group" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/baizid-steel.png" alt="Baizid Steel" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/samuda.png" alt="Samuda" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/q-pail.png" alt="Q Pail" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/japfa.png" alt="Japfa" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/xclusive.png" alt="Xclusive" loading="lazy"/></span>
     <!-- duplicate for seamless loop -->
-    <span class="marquee-item">Arla</span>
-    <span class="marquee-item">Berger</span>
-    <span class="marquee-item">Marico</span>
-    <span class="marquee-item">DBL Group</span>
-    <span class="marquee-item">Linde</span>
-    <span class="marquee-item">Noman Group</span>
-    <span class="marquee-item">GPH ispat</span>
-    <span class="marquee-item">Prothom Alo</span>
-    <span class="marquee-item">Omera</span>
-    <span class="marquee-item">Partex Star</span>
-    <span class="marquee-item">KSRM</span>
-    <span class="marquee-item">Pacific Jeans</span>
-    <span class="marquee-item">The Daily Star</span>
-    <span class="marquee-item">Transcom Beverages</span>
-    <span class="marquee-item">SAAD Group</span>
-    <span class="marquee-item">Shanta</span>
-    <span class="marquee-item">Bengal Group</span>
-    <span class="marquee-item">Baizid Steel</span>
-    <span class="marquee-item">BD Food</span>
-    <span class="marquee-item">Japfa</span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/akubashir-group.png" alt="Akubashir Group" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/akg.png" alt="AKG" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/dbl.png" alt="DBL Group" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/linde.png" alt="Linde" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/omera.png" alt="Omera" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/ksrm.png" alt="KSRM" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/nasir-group.png" alt="Nasir Group" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/the-daily-star.png" alt="The Daily Star" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/experience-group.png" alt="Experience Group" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/transcom-beverages.png" alt="Transcom Beverages" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/ofs-cables.png" alt="OFS Cables" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/saad-group.png" alt="SAAD Group" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/arbab-group.png" alt="Arbab Group" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/shanta.png" alt="Shanta" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/bengal-group.png" alt="Bengal Group" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/baizid-steel.png" alt="Baizid Steel" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/samuda.png" alt="Samuda" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/q-pail.png" alt="Q Pail" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/japfa.png" alt="Japfa" loading="lazy"/></span>
+    <span class="marquee-item"><img class="marquee-logo" src="assets/partners/xclusive.png" alt="Xclusive" loading="lazy"/></span>
   </div>
 </div>
 
@@ -454,18 +510,66 @@
 
       <div class="coverage reveal delay-1" aria-label="Bangladesh coverage map with major operating hubs">
         <svg class="bd-map" viewBox="0 0 500 400" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
-          <!-- Stylized Bangladesh outline -->
           <defs>
             <linearGradient id="mapFill" x1="0" y1="0" x2="1" y2="1">
               <stop offset="0%" stop-color="#eaf0fb"/>
               <stop offset="100%" stop-color="#d7e1f3"/>
             </linearGradient>
+            <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#f4a83c" stop-opacity=".45"/>
+              <stop offset="100%" stop-color="#f4a83c" stop-opacity="0"/>
+            </radialGradient>
           </defs>
+          <!-- Bangladesh outline -->
           <path d="M120 60 Q160 40 210 55 Q260 45 300 70 Q340 85 360 120 Q385 150 380 180 Q395 210 380 240 Q395 280 360 300 Q330 330 300 340 Q270 355 240 345 Q200 360 170 340 Q140 330 125 300 Q95 275 105 245 Q85 215 100 180 Q85 145 110 115 Q110 85 120 60 Z"
             fill="url(#mapFill)" stroke="#0a2352" stroke-width="1.4" opacity=".95"/>
-          <!-- River lines -->
+          <!-- Rivers -->
           <path d="M160 120 Q200 160 220 220 Q230 270 270 310" stroke="#9fbae6" stroke-width="2" fill="none" opacity=".7"/>
           <path d="M250 90 Q270 160 290 230 Q310 290 330 320" stroke="#9fbae6" stroke-width="2" fill="none" opacity=".5"/>
+
+          <!-- District dots (all 64) — scattered across the country outline -->
+          <g class="district-dots" fill="#0a2352" opacity=".4">
+            <circle cx="145" cy="90" r="2"/><circle cx="175" cy="85" r="2"/><circle cx="205" cy="80" r="2"/>
+            <circle cx="235" cy="78" r="2"/><circle cx="265" cy="82" r="2"/><circle cx="295" cy="92" r="2"/>
+            <circle cx="130" cy="110" r="2"/><circle cx="165" cy="115" r="2"/><circle cx="195" cy="110" r="2"/>
+            <circle cx="260" cy="105" r="2"/><circle cx="290" cy="115" r="2"/><circle cx="320" cy="120" r="2"/>
+            <circle cx="115" cy="135" r="2"/><circle cx="145" cy="140" r="2"/><circle cx="175" cy="150" r="2"/>
+            <circle cx="275" cy="135" r="2"/><circle cx="310" cy="145" r="2"/><circle cx="345" cy="145" r="2"/>
+            <circle cx="110" cy="165" r="2"/><circle cx="140" cy="170" r="2"/><circle cx="170" cy="180" r="2"/>
+            <circle cx="200" cy="175" r="2"/><circle cx="255" cy="170" r="2"/><circle cx="285" cy="175" r="2"/>
+            <circle cx="315" cy="180" r="2"/><circle cx="350" cy="175" r="2"/>
+            <circle cx="100" cy="200" r="2"/><circle cx="130" cy="205" r="2"/><circle cx="165" cy="210" r="2"/>
+            <circle cx="195" cy="210" r="2"/><circle cx="255" cy="205" r="2"/><circle cx="290" cy="215" r="2"/>
+            <circle cx="325" cy="215" r="2"/><circle cx="360" cy="210" r="2"/>
+            <circle cx="110" cy="235" r="2"/><circle cx="145" cy="240" r="2"/><circle cx="180" cy="240" r="2"/>
+            <circle cx="215" cy="245" r="2"/><circle cx="270" cy="245" r="2"/><circle cx="300" cy="245" r="2"/>
+            <circle cx="335" cy="245" r="2"/><circle cx="365" cy="240" r="2"/>
+            <circle cx="120" cy="270" r="2"/><circle cx="155" cy="270" r="2"/><circle cx="190" cy="275" r="2"/>
+            <circle cx="225" cy="275" r="2"/><circle cx="255" cy="280" r="2"/><circle cx="290" cy="280" r="2"/>
+            <circle cx="340" cy="275" r="2"/><circle cx="365" cy="270" r="2"/>
+            <circle cx="130" cy="300" r="2"/><circle cx="165" cy="305" r="2"/><circle cx="200" cy="310" r="2"/>
+            <circle cx="235" cy="310" r="2"/><circle cx="280" cy="315" r="2"/><circle cx="315" cy="315" r="2"/>
+            <circle cx="340" cy="310" r="2"/>
+            <circle cx="155" cy="330" r="2"/><circle cx="190" cy="335" r="2"/><circle cx="240" cy="340" r="2"/>
+            <circle cx="280" cy="340" r="2"/><circle cx="315" cy="335" r="2"/>
+          </g>
+
+          <!-- Active lanes connecting hubs (animated) -->
+          <g class="lanes" fill="none" stroke="#f4a83c" stroke-width="1.4" stroke-linecap="round" opacity=".75">
+            <path d="M220 175 Q265 210 325 270" stroke-dasharray="5 4">
+              <animate attributeName="stroke-dashoffset" from="0" to="-90" dur="2.4s" repeatCount="indefinite"/>
+            </path>
+            <path d="M220 175 Q200 140 270 110" stroke-dasharray="5 4">
+              <animate attributeName="stroke-dashoffset" from="0" to="-90" dur="3.2s" repeatCount="indefinite"/>
+            </path>
+            <path d="M220 175 Q170 210 150 265" stroke-dasharray="5 4">
+              <animate attributeName="stroke-dashoffset" from="0" to="-90" dur="2.8s" repeatCount="indefinite"/>
+            </path>
+          </g>
+
+          <!-- Hub glows -->
+          <circle cx="220" cy="175" r="40" fill="url(#hubGlow)"/>
+          <circle cx="325" cy="270" r="36" fill="url(#hubGlow)"/>
         </svg>
         <!-- Dhaka (capital) -->
         <div class="pin lg" style="left: 44%; top: 44%;" aria-hidden="true"></div>
@@ -479,6 +583,12 @@
         <!-- Khulna -->
         <div class="pin" style="left: 30%; top: 66%;" aria-hidden="true"></div>
         <div class="pin-label" style="left: 30%; top: 72%;">Khulna</div>
+
+        <div class="coverage-legend" aria-hidden="true">
+          <span><i class="dot hub"></i> Operating hubs</span>
+          <span><i class="dot small"></i> District coverage</span>
+          <span><i class="line"></i> Active lanes</span>
+        </div>
       </div>
     </div>
   </div>
@@ -622,7 +732,7 @@
     <div class="footer-grid">
       <div>
         <a class="brand" href="index.html" style="color: var(--white);">
-          <span class="mark" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true"><path d="M4 44 Q30 60 56 42 Q62 37 62 33 L55 31 Q50 37 43 41 Q26 49 6 40 Z" fill="#0a2352"/><path d="M11 54 L11 8 L18 8 L32 34 L27 42 L22 26 L22 54 Z" fill="#e11920"/><path d="M32 34 L46 8 L53 8 L53 54 L46 54 L46 26 L41 42 Z" fill="#e11920"/></svg></span>
+          <span class="mark" aria-hidden="true"><img src="assets/logo-mark.png" alt=""/></span>
           <span>Mozumder <small style="color: rgba(255,255,255,.6);">Company</small></span>
         </a>
         <p class="tag">Streamlined logistics, accelerated growth. Bangladesh&rsquo;s trusted partner for transportation, freight and corporate supply.</p>
@@ -672,5 +782,20 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/enhance.js"></script>
+<script src="js/enhance-v2.js"></script>
+
+<!-- Floating Contact FAB -->
+<div class="fab-stack" aria-label="Quick contact">
+  <a class="fab wa" href="https://wa.me/8801979628953?text=Hello%20Mozumder%20Company%2C%20I'd%20like%20a%20quote" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <span class="fab-label">Chat on WhatsApp</span>
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.84 11.84 0 0 0 12.04 0C5.46 0 .13 5.33.13 11.91c0 2.1.55 4.14 1.6 5.95L0 24l6.33-1.66a11.9 11.9 0 0 0 5.7 1.46h.01c6.58 0 11.91-5.33 11.91-11.91 0-3.18-1.24-6.17-3.43-8.41zM12.04 21.76h-.01a9.82 9.82 0 0 1-5-1.37l-.36-.21-3.76.98 1-3.67-.23-.38a9.8 9.8 0 0 1-1.5-5.2c0-5.44 4.43-9.86 9.87-9.86 2.64 0 5.11 1.03 6.98 2.9a9.81 9.81 0 0 1 2.9 6.98c0 5.43-4.43 9.85-9.89 9.85zm5.42-7.37c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.76.97-.94 1.17-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.11 3.22 5.11 4.51.71.31 1.27.49 1.7.63.71.23 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+  </a>
+  <a class="fab tel" href="tel:+8801979628953" aria-label="Call Mozumder Company">
+    <span class="fab-label">+880 1979-628953</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.28-1.28a2 2 0 0 1 2.11-.45c.9.35 1.84.59 2.8.72A2 2 0 0 1 22 16.92z"/></svg>
+  </a>
+</div>
+
 </body>
 </html>
