@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mozumder mark">
+  <!-- navy swoosh -->
+  <path d="M4 44 Q30 60 56 42 Q62 37 62 33 L55 31 Q50 37 43 41 Q26 49 6 40 Z" fill="#0a2352"/>
+  <!-- red M left peak -->
+  <path d="M11 54 L11 8 L18 8 L32 34 L27 42 L22 26 L22 54 Z" fill="#e11920"/>
+  <!-- red M right peak -->
+  <path d="M32 34 L46 8 L53 8 L53 54 L46 54 L46 26 L41 42 Z" fill="#e11920"/>
+  <!-- swoosh tail -->
+  <path d="M50 38 Q58 34 62 30 L55 28 Q50 34 46 36 Z" fill="#0a2352"/>
+</svg>

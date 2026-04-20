@@ -171,12 +171,15 @@ p  { margin: 0 0 1em; color: var(--text-muted); }
   color: var(--ink-deep);
 }
 .brand .mark {
-  width: 40px; height: 40px;
+  width: 44px; height: 44px;
   display: grid; place-items: center;
-  background: var(--ink-deep); color: var(--gold);
+  background: var(--white);
+  border: 1.5px solid #c8102e;
   border-radius: 10px;
-  box-shadow: 0 8px 20px -10px rgba(10,31,77,.5);
+  box-shadow: 0 6px 16px -8px rgba(10,31,77,.35), inset 0 0 0 2px #ffffff, inset 0 0 0 3.5px #0a2352;
+  overflow: hidden;
 }
+.brand .mark svg { width: 30px; height: 30px; }
 .brand small { display: block; color: var(--text-muted); font-weight: 500; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
 .nav-menu {
   display: flex; align-items: center; gap: 6px;
@@ -277,7 +280,7 @@ p  { margin: 0 0 1em; color: var(--text-muted); }
   font-size: .82rem; color: rgba(255,255,255,.7); letter-spacing: .05em; text-transform: uppercase;
 }
 
-/* Hero visual panel */
+/* Hero visual panel — animated shipping scene */
 .hero-visual {
   position: relative;
   aspect-ratio: 4/5;
@@ -285,12 +288,14 @@ p  { margin: 0 0 1em; color: var(--text-muted); }
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
-  background: #0a1f4d url("https://images.unsplash.com/photo-1494412519320-aa613dfb7738?auto=format&fit=crop&w=1600&q=80") center/cover;
+  background: linear-gradient(180deg, #0a2352 0%, #102a66 55%, #173a88 100%);
 }
 .hero-visual::after {
   content: "";
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(6,22,56,.05) 0%, rgba(6,22,56,.75) 100%);
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(700px 300px at 70% 30%, rgba(244,168,60,.18), transparent 60%),
+    linear-gradient(180deg, transparent 60%, rgba(6,22,56,.55) 100%);
 }
 .hero-visual .tag {
   position: absolute; left: 20px; top: 20px; z-index: 2;
@@ -474,6 +479,42 @@ p  { margin: 0 0 1em; color: var(--text-muted); }
 .concern-card .cc-meta span { display: inline-flex; align-items: center; gap: 6px; }
 .concern-card .cc-meta span::before { content: ""; width: 6px; height: 6px; background: var(--gold); border-radius: 999px; }
 
+/* Featured concern card (Mozumder Logistics & Mozumder Freight) */
+.concern-card.featured {
+  background: linear-gradient(170deg, #ffffff 0%, #fff8ea 100%);
+  border-color: rgba(244,168,60,.5);
+  box-shadow: 0 20px 48px -28px rgba(244,168,60,.45), 0 2px 4px rgba(0,0,0,.03);
+}
+.concern-card.featured::before {
+  content: ""; position: absolute; inset: 0; border-radius: var(--radius);
+  padding: 1.5px;
+  background: linear-gradient(135deg, var(--gold), #f7b96a, var(--gold-dark));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+.concern-card.featured:hover { box-shadow: 0 26px 56px -24px rgba(244,168,60,.55); }
+.concern-card.featured .cc-id {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--ink-deep);
+}
+.cc-badge {
+  position: absolute; top: 14px; right: 14px;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 10px 5px 8px;
+  background: var(--ink-deep);
+  color: var(--gold-bright);
+  border-radius: 999px;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
+}
+.cc-badge svg { width: 12px; height: 12px; }
+.concern-card { position: relative; color: inherit; text-decoration: none; display: block; }
+.fleet-card, .service-card { color: inherit; text-decoration: none; }
+a.fleet-card, a.service-card, a.concern-card { display: flex; flex-direction: column; }
+a.service-card { display: flex; flex-direction: column; justify-content: space-between; }
+
 /* ---------- Fleet grid ---------- */
 .fleet-grid {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px;
@@ -515,6 +556,14 @@ p  { margin: 0 0 1em; color: var(--text-muted); }
   display: block; font-family: var(--font-body); font-weight: 500;
   color: var(--text-soft); font-size: .76rem; letter-spacing: .06em; text-transform: uppercase; margin-top: 4px;
 }
+.partner-tile img {
+  max-width: 72%; max-height: 70px; width: auto; height: auto;
+  object-fit: contain;
+  filter: grayscale(60%) contrast(1.05);
+  opacity: .9;
+  transition: filter .35s var(--ease), opacity .35s var(--ease), transform .35s var(--ease);
+}
+.partner-tile:hover img { filter: none; opacity: 1; transform: scale(1.04); }
 
 /* ---------- Why Choose ---------- */
 .why-grid {
@@ -662,6 +711,316 @@ p  { margin: 0 0 1em; color: var(--text-muted); }
 @media (prefers-reduced-motion: reduce) {
   .reveal, .reveal.in { opacity: 1; transform: none; transition: none; }
   * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
+
+/* ==========================================================
+   SHIPPING / TRUCKING ANIMATED SCENES
+   ========================================================== */
+
+/* Hero truck scene (inside .hero-visual) */
+.shipping-scene {
+  position: absolute; inset: 0;
+  overflow: hidden;
+}
+.shipping-scene .sky {
+  position: absolute; inset: 0 0 40% 0;
+  background: linear-gradient(180deg, #0a2352 0%, #1b428f 60%, #f4a83c 100%);
+  opacity: .85;
+}
+.shipping-scene .stars {
+  position: absolute; inset: 0 0 50% 0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 10% 20%, rgba(255,255,255,.8), transparent 50%),
+    radial-gradient(1.5px 1.5px at 30% 40%, rgba(255,255,255,.6), transparent 50%),
+    radial-gradient(1px 1px at 55% 15%, rgba(255,255,255,.7), transparent 50%),
+    radial-gradient(1.5px 1.5px at 75% 35%, rgba(255,255,255,.5), transparent 50%),
+    radial-gradient(1px 1px at 85% 10%, rgba(255,255,255,.8), transparent 50%),
+    radial-gradient(1.5px 1.5px at 90% 45%, rgba(255,255,255,.6), transparent 50%);
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+@keyframes twinkle { from { opacity: .3; } to { opacity: .9; } }
+
+/* Clouds drifting */
+.shipping-scene .clouds {
+  position: absolute; top: 8%; left: 0; right: 0; height: 20%;
+  background-image:
+    radial-gradient(ellipse 70px 16px at 20% 50%, rgba(255,255,255,.22), transparent 70%),
+    radial-gradient(ellipse 100px 20px at 55% 40%, rgba(255,255,255,.18), transparent 70%),
+    radial-gradient(ellipse 80px 18px at 85% 60%, rgba(255,255,255,.2), transparent 70%);
+  animation: cloud-drift 32s linear infinite;
+}
+@keyframes cloud-drift {
+  from { background-position: 0 0, 0 0, 0 0; }
+  to   { background-position: 200px 0, 260px 0, 220px 0; }
+}
+
+/* Sun/glow */
+.shipping-scene .sun {
+  position: absolute; right: 16%; top: 22%;
+  width: 90px; height: 90px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255,205,120,.9), rgba(244,168,60,.55) 50%, transparent 70%);
+  filter: blur(.3px);
+  animation: sun-pulse 3.5s ease-in-out infinite alternate;
+}
+@keyframes sun-pulse { from { transform: scale(1); opacity: .9; } to { transform: scale(1.08); opacity: 1; } }
+
+/* Distant port cranes silhouette */
+.shipping-scene .cranes {
+  position: absolute; bottom: 40%; left: 0; right: 0; height: 12%;
+  background-image:
+    linear-gradient(transparent, transparent);
+}
+.shipping-scene .cranes svg {
+  position: absolute; bottom: 0; left: 5%;
+  width: 90%; height: 100%;
+  opacity: .65;
+}
+
+/* Ocean / road base */
+.shipping-scene .ocean {
+  position: absolute; inset: auto 0 0 0; height: 40%;
+  background: linear-gradient(180deg, #0a2352 0%, #061638 100%);
+  overflow: hidden;
+}
+.shipping-scene .ocean::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(180deg, transparent 0, transparent 6px, rgba(244,168,60,.05) 6px, rgba(244,168,60,.05) 7px);
+  animation: ripple 6s linear infinite;
+}
+@keyframes ripple { from { transform: translateY(0); } to { transform: translateY(14px); } }
+
+/* Container ship */
+.shipping-scene .ship {
+  position: absolute; bottom: 18%; left: -40%;
+  width: 60%;
+  animation: ship-sail 22s linear infinite;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.3));
+}
+@keyframes ship-sail {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(220%); }
+}
+
+/* Road surface */
+.shipping-scene .road {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 22%;
+  background: linear-gradient(180deg, #1a2235 0%, #0a1220 100%);
+  overflow: hidden;
+}
+.shipping-scene .road::before {
+  content: ""; position: absolute; top: 30%; left: 0; right: 0; height: 3px;
+  background: repeating-linear-gradient(90deg, var(--gold) 0 24px, transparent 24px 56px);
+  animation: road-dash 1.2s linear infinite;
+}
+@keyframes road-dash { from { background-position: 0 0; } to { background-position: -80px 0; } }
+
+/* Truck driving on road */
+.shipping-scene .truck {
+  position: absolute; bottom: 1%; left: -30%;
+  width: 60%;
+  animation: truck-drive 12s cubic-bezier(.4,.0,.6,1) infinite;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,.45));
+}
+@keyframes truck-drive {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(230%); }
+}
+.shipping-scene .truck .wheel {
+  transform-origin: center;
+  animation: wheel-spin .4s linear infinite;
+}
+@keyframes wheel-spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
+/* Scene caption */
+.shipping-scene .tag {
+  position: absolute; left: 20px; top: 20px; z-index: 3;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 14px; border-radius: 999px;
+  background: rgba(255,255,255,.14);
+  backdrop-filter: blur(12px);
+  color: var(--white); font-size: .85rem; font-weight: 600;
+  border: 1px solid rgba(255,255,255,.22);
+}
+.shipping-scene .tag .dot { width: 8px; height: 8px; border-radius: 999px; background: var(--gold-bright); box-shadow: 0 0 0 4px rgba(244,168,60,.25); animation: pulse 1.8s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 4px rgba(244,168,60,.25); } 50% { box-shadow: 0 0 0 8px rgba(244,168,60,.15); } }
+.shipping-scene .caption {
+  position: absolute; inset: auto 20px 20px 20px; z-index: 3;
+  color: var(--white);
+}
+.shipping-scene .caption .t { font-family: var(--font-display); font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em; }
+.shipping-scene .caption .s { color: rgba(255,255,255,.82); font-size: .95rem; }
+
+/* ---------- Multimodal journey band ---------- */
+.journey {
+  background: linear-gradient(180deg, var(--ink-deep) 0%, #08183d 100%);
+  color: var(--white);
+  padding: clamp(72px, 10vw, 120px) 0;
+  position: relative; overflow: hidden;
+}
+.journey::before {
+  content: ""; position: absolute; inset: 0; opacity: .08;
+  background-image:
+    linear-gradient(rgba(255,255,255,.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.4) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
+.journey .wrap { position: relative; }
+.journey h2 { color: var(--white); }
+.journey .lead { color: rgba(255,255,255,.72); }
+
+.journey-track {
+  position: relative;
+  margin-top: 56px;
+  padding: 80px 0 60px;
+}
+.journey-track::before {
+  content: "";
+  position: absolute; left: 6%; right: 6%; top: 50%;
+  height: 2px; transform: translateY(-50%);
+  background: repeating-linear-gradient(90deg, rgba(244,168,60,.6) 0 10px, transparent 10px 22px);
+  animation: road-dash 1.4s linear infinite;
+}
+.journey-stops {
+  position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; z-index: 1;
+}
+.journey-stop {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  text-align: center;
+}
+.journey-stop .orb {
+  width: 64px; height: 64px; border-radius: 999px;
+  background: linear-gradient(135deg, var(--ink) 0%, var(--ink-deep) 100%);
+  border: 2px solid rgba(244,168,60,.4);
+  display: grid; place-items: center;
+  color: var(--gold-bright);
+  box-shadow: 0 0 0 0 rgba(244,168,60,.3);
+  animation: stop-pulse 2.4s ease-out infinite;
+}
+.journey-stop:nth-child(2) .orb { animation-delay: .4s; }
+.journey-stop:nth-child(3) .orb { animation-delay: .8s; }
+.journey-stop:nth-child(4) .orb { animation-delay: 1.2s; }
+.journey-stop:nth-child(5) .orb { animation-delay: 1.6s; }
+@keyframes stop-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(244,168,60,.4); }
+  70%  { box-shadow: 0 0 0 14px rgba(244,168,60,0); }
+  100% { box-shadow: 0 0 0 0 rgba(244,168,60,0); }
+}
+.journey-stop .orb svg { width: 32px; height: 32px; }
+.journey-stop .t { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--white); }
+.journey-stop .s { font-size: .82rem; color: rgba(255,255,255,.6); letter-spacing: .03em; }
+
+/* Floating truck that rides across the track */
+.journey-mover {
+  position: absolute; top: 50%; left: 0;
+  width: 76px; height: 48px; transform: translateY(-55%);
+  animation: journey-travel 14s cubic-bezier(.45,.05,.55,.95) infinite;
+  z-index: 2;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,.4));
+}
+@keyframes journey-travel {
+  0%   { left: 6%; opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { left: 94%; opacity: 0; }
+}
+.journey-mover .wheel { transform-origin: center; animation: wheel-spin .35s linear infinite; }
+
+/* Lane backdrop — subtle map silhouette */
+.journey .map-bg {
+  position: absolute; inset: 0; opacity: .08; pointer-events: none;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400' fill='none' stroke='%23f4a83c' stroke-width='0.6'><path d='M0 200 Q100 180 150 210 T300 200 T450 180 T600 210 T800 200'/><path d='M0 240 Q120 220 190 250 T360 240 T540 220 T800 250'/></svg>") center/cover no-repeat;
+}
+
+/* ---------- Coverage map (Bangladesh cities) ---------- */
+.coverage {
+  position: relative;
+  aspect-ratio: 5/4;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, #f7f5f0 0%, #fff 100%);
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+}
+.coverage svg.bd-map {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+}
+.pin {
+  position: absolute; transform: translate(-50%, -100%);
+  width: 14px; height: 14px; border-radius: 999px;
+  background: var(--gold);
+  border: 3px solid var(--ink-deep);
+  box-shadow: 0 0 0 0 rgba(244,168,60,.55);
+  animation: stop-pulse 2.4s ease-out infinite;
+}
+.pin.lg { width: 18px; height: 18px; border-width: 4px; }
+.pin-label {
+  position: absolute;
+  font-family: var(--font-display); font-weight: 700; font-size: .85rem;
+  color: var(--ink-deep);
+  background: var(--white);
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline);
+  box-shadow: var(--shadow-sm);
+  transform: translate(-50%, 0);
+  white-space: nowrap;
+}
+
+/* ---------- Animated container stack ---------- */
+.container-stack {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px;
+  margin-top: 28px;
+}
+.cnt-box {
+  aspect-ratio: 16/9;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #c8102e 0%, #8c0920 100%);
+  border: 1px solid rgba(0,0,0,.15);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.1);
+  animation: cnt-rise .9s var(--ease) both;
+  position: relative;
+}
+.cnt-box::before, .cnt-box::after {
+  content: ""; position: absolute; left: 8%; right: 8%; height: 2px;
+  background: rgba(0,0,0,.25);
+}
+.cnt-box::before { top: 30%; }
+.cnt-box::after { top: 60%; }
+.cnt-box:nth-child(even) { background: linear-gradient(180deg, #1b428f 0%, #0a2352 100%); }
+.cnt-box:nth-child(3n) { background: linear-gradient(180deg, #f4a83c 0%, #c98622 100%); }
+.cnt-box:nth-child(1) { animation-delay: .05s; }
+.cnt-box:nth-child(2) { animation-delay: .10s; }
+.cnt-box:nth-child(3) { animation-delay: .15s; }
+.cnt-box:nth-child(4) { animation-delay: .20s; }
+.cnt-box:nth-child(5) { animation-delay: .25s; }
+.cnt-box:nth-child(6) { animation-delay: .30s; }
+.cnt-box:nth-child(7) { animation-delay: .35s; }
+.cnt-box:nth-child(8) { animation-delay: .40s; }
+.cnt-box:nth-child(9) { animation-delay: .45s; }
+.cnt-box:nth-child(10){ animation-delay: .50s; }
+.cnt-box:nth-child(11){ animation-delay: .55s; }
+.cnt-box:nth-child(12){ animation-delay: .60s; }
+@keyframes cnt-rise {
+  from { opacity: 0; transform: translateY(20px) scale(.9); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Responsive tweaks for new sections */
+@media (max-width: 880px) {
+  .journey-stops { grid-template-columns: repeat(5, 1fr); gap: 4px; }
+  .journey-stop .orb { width: 54px; height: 54px; }
+  .journey-stop .t { font-size: .9rem; }
+  .journey-stop .s { display: none; }
+  .container-stack { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 480px) {
+  .journey-stops .journey-stop:nth-child(2) .s,
+  .journey-stops .journey-stop:nth-child(4) .s { display: none; }
+  .container-stack { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ---------- Responsive ---------- */
