@@ -57,9 +57,14 @@
 <section>
   <div class="container">
     <div class="quote-wrap">
-      <form id="quote-form" class="quote-form" data-email="info.jakir15@gmail.com" novalidate>
+      <form id="quote-form" class="quote-form" novalidate>
         <h3 data-i18n="q.h">Request a Quote</h3>
         <p class="muted" data-i18n="q.sub">Takes about 90 seconds. We reply the same day.</p>
+
+        <!-- Bot trap: hidden from people, irresistible to scrapers.
+             Handled in js/enhance-v2.js — a filled value is silently dropped. -->
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off"
+               aria-hidden="true" style="display:none" />
 
         <div class="quote-grid">
           <div class="field">

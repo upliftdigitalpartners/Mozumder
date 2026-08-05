@@ -5,6 +5,29 @@
 (function () {
   "use strict";
 
+  /* ============================================================
+     QUOTE FORM CONFIG — the only thing you need to edit to go live
+     ============================================================
+
+     1. Go to https://web3forms.com and enter the address that should
+        receive quote requests (use info@mozumderbd.net, not a personal
+        inbox). No account or password required.
+     2. Web3Forms emails you an access key. Paste it between the quotes
+        below and push. That's it — the form is live.
+     3. In the Web3Forms dashboard, restrict the key to mozumderbd.net so
+        nobody else can submit through it.
+
+     The key is designed to be public and is safe to commit — it only
+     works from your own domain and can only send mail to the address it
+     was issued for.
+
+     Until a key is set, the form falls back to opening the visitor's mail
+     client (and says so plainly rather than claiming the request was sent).
+  */
+  const WEB3FORMS_KEY = "";                                // <-- paste key here
+  const WEB3FORMS_URL = "https://api.web3forms.com/submit";
+  const QUOTE_EMAIL   = "info@mozumderbd.net";             // mailto fallback recipient
+
   /* =========== i18n: English ↔ Bangla =========== */
   const I18N = {
     // Navigation
@@ -62,6 +85,9 @@
                         bn: "ধন্যবাদ! আপনার অনুরোধ পেয়েছি। এক কার্যদিবসের মধ্যে উত্তর দেব।" },
     "q.error":        { en: "Something went wrong. Please call us at +880 1979-628953.",
                         bn: "কিছু ভুল হয়েছে। অনুগ্রহ করে কল করুন: +৮৮০ ১৯৭৯-৬২৮৯৫৩।" },
+    "q.sending":      { en: "Sending…",              bn: "পাঠানো হচ্ছে…" },
+    "q.fallback":     { en: "Your email app should now be open with the request ready to send — press send to reach us. If nothing opened, call +880 1979-628953.",
+                        bn: "আপনার ইমেইল অ্যাপ খুলে অনুরোধটি প্রস্তুত হয়ে যাওয়ার কথা — পাঠাতে সেন্ড চাপুন। কিছু না খুললে কল করুন: +৮৮০ ১৯৭৯-৬২৮৯৫৩।" },
 
     "q.aside.h":      { en: "Why shippers choose Mozumder",
                         bn: "শিপাররা কেন মজুমদার বেছে নেন" },
@@ -85,7 +111,17 @@
     "svc.other":      { en: "Other / not sure",        bn: "অন্যান্য" }
   };
 
+  let currentLang = "en";
+
+  // Look up a string in the active language, falling back to English.
+  function t(key) {
+    const rec = I18N[key];
+    if (!rec) return "";
+    return rec[currentLang] || rec.en || "";
+  }
+
   function applyLang(lang) {
+    currentLang = lang === "bn" ? "bn" : "en";
     document.body.classList.toggle("lang-bn", lang === "bn");
     document.body.classList.toggle("lang-en", lang !== "bn");
     document.documentElement.setAttribute("lang", lang);
@@ -125,26 +161,51 @@
   }
 
   /* =========== Quote form =========== */
+
+  // Show a message in one of the status boxes. Writes data-i18n too, so the
+  // message survives a later language switch instead of reverting to the
+  // markup default.
+  function showMessage(el, key) {
+    if (!el) return;
+    el.setAttribute("data-i18n", key);
+    el.textContent = t(key);
+    el.classList.add("on");
+  }
+
   function initQuoteForm() {
     const form = document.getElementById("quote-form");
     if (!form) return;
-    const ok = form.querySelector(".quote-success");
+    const ok  = form.querySelector(".quote-success");
     const err = form.querySelector(".quote-error");
     const btn = form.querySelector("button[type=submit]");
+    // The submit button holds a label span and an arrow SVG. Retarget the
+    // span so swapping the label doesn't wipe the icon.
+    const btnLabel = btn.querySelector("[data-i18n='q.submit']") || btn;
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       ok.classList.remove("on"); err.classList.remove("on");
-      btn.disabled = true;
-      const originalLabel = btn.textContent;
-      btn.textContent = "Sending…";
+
+      // The form carries `novalidate` so the browser doesn't interrupt with
+      // its own bubbles mid-typing — run the same checks explicitly here.
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
 
       const data = new FormData(form);
-      // Build a clean mailto / fetch payload.
       const payload = {};
       for (const [k, v] of data.entries()) payload[k] = v;
 
-      // Compose email body for mailto fallback
+      // Bot trap: a field hidden from humans. Anything that fills it is a
+      // scraper — pretend to succeed so it doesn't retry, and send nothing.
+      if (payload.botcheck) {
+        showMessage(ok, "q.success");
+        form.reset();
+        return;
+      }
+      delete payload.botcheck;
+
       const subject = `Quote request — ${payload.name || "New lead"}${payload.company ? " (" + payload.company + ")" : ""}`;
       const lines = [
         `Name: ${payload.name}`,
@@ -164,38 +225,49 @@
       ];
       const body = lines.join("\n");
 
-      // Try Formspree-style endpoint if configured; fall back to mailto
-      const endpoint = form.dataset.endpoint;
-      let sent = false;
-      if (endpoint && /^https?:\/\//.test(endpoint)) {
-        try {
-          const res = await fetch(endpoint, {
-            method: "POST",
-            headers: { "Accept": "application/json", "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-          });
-          if (res.ok) sent = true;
-        } catch {}
-      }
-
-      if (!sent) {
-        // Mailto fallback — open user's mail client
-        const to = form.dataset.email || "info.jakir15@gmail.com";
-        const url = "mailto:" + encodeURIComponent(to) +
+      // No key configured yet — fall back to the visitor's mail client and
+      // say so. Never claim the request reached us when we can't know.
+      if (!WEB3FORMS_KEY) {
+        const url = "mailto:" + encodeURIComponent(QUOTE_EMAIL) +
                     "?subject=" + encodeURIComponent(subject) +
                     "&body=" + encodeURIComponent(body);
         window.location.href = url;
-        sent = true; // we assume mail client opened
+        showMessage(ok, "q.fallback");
+        return;
       }
 
-      if (sent) {
-        ok.classList.add("on");
-        form.reset();
-      } else {
-        err.classList.add("on");
+      btn.disabled = true;
+      const originalLabel = btnLabel.textContent;
+      btnLabel.textContent = t("q.sending");
+
+      try {
+        const res = await fetch(WEB3FORMS_URL, {
+          method: "POST",
+          headers: { "Accept": "application/json", "Content-Type": "application/json" },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            subject: subject,
+            from_name: "Mozumder website — quote form",
+            // replyto lets staff hit Reply and reach the customer directly
+            replyto: payload.email || "",
+            message: body,
+            ...payload
+          })
+        });
+        const result = await res.json().catch(() => ({}));
+        if (res.ok && result.success) {
+          showMessage(ok, "q.success");
+          form.reset();
+        } else {
+          showMessage(err, "q.error");
+        }
+      } catch {
+        // Network failure, offline, blocked — a real error, reported as one.
+        showMessage(err, "q.error");
+      } finally {
+        btn.disabled = false;
+        btnLabel.textContent = originalLabel;
       }
-      btn.disabled = false;
-      btn.textContent = originalLabel;
     });
   }
 
