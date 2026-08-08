@@ -1,6 +1,6 @@
-# Mozumder Company — Website
+# Mozumder — Website
 
-A modern, handcrafted static website for **Mozumder Company** — a diversified logistics and transportation enterprise based in Chattogram, Bangladesh.
+A modern, handcrafted static website for **Mozumder** — a diversified logistics and transportation enterprise based in Chattogram, Bangladesh.
 
 > "Streamlined Logistics, Accelerated Growth."
 
@@ -98,7 +98,7 @@ backend (no server needed), use a free service like:
 
 ## Content sources
 
-Content copy was adapted from the Mozumder Company profile (2025) including:
+Content copy was adapted from the Mozumder profile (2025) including:
 
 - About Us / Welcome / Mission & Vision
 - Six sister concerns
@@ -108,6 +108,6 @@ Content copy was adapted from the Mozumder Company profile (2025) including:
 
 ## License
 
-Mozumder Company content and branding are property of Mozumder Company.
+Mozumder content and branding are property of Mozumder.
 The website template code may be modified freely for the company&rsquo;s
 own use.
