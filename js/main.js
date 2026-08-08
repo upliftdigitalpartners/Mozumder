@@ -1,5 +1,5 @@
 /* ==========================================================
-   Mozumder Company — Main JS
+   Mozumder — Main JS
    ---------------------------------------------------------
    - Sticky header state
    - Mobile nav toggle

@@ -48,7 +48,7 @@
     "hero.h1.l3.a":   { en: "on time,",                bn: "সময়মতো," },
     "hero.h1.l3.b":   { en: "every time.",             bn: "প্রতিবার।" },
     "hero.lead":      { en: "Since 2008, Mozumder has delivered reliable transportation, freight forwarding, heavy equipment and corporate supply to the country's most demanding shippers. A diversified fleet, a disciplined team, a single commitment: your cargo, handled right.",
-                        bn: "২০০৮ সাল থেকে মজুমদার কোম্পানি দেশের সবচেয়ে কঠিন শিপারদের জন্য নির্ভরযোগ্য পরিবহন, ফ্রেইট ফরওয়ার্ডিং, ভারী যন্ত্রপাতি ও কর্পোরেট সরবরাহ প্রদান করছে। বৈচিত্র্যময় বহর, সুশৃঙ্খল দল, একটিই প্রতিশ্রুতি: আপনার পণ্য, সঠিকভাবে পরিচালিত।" },
+                        bn: "২০০৮ সাল থেকে মজুমদার দেশের সবচেয়ে কঠিন শিপারদের জন্য নির্ভরযোগ্য পরিবহন, ফ্রেইট ফরওয়ার্ডিং, ভারী যন্ত্রপাতি ও কর্পোরেট সরবরাহ প্রদান করছে। বৈচিত্র্যময় বহর, সুশৃঙ্খল দল, একটিই প্রতিশ্রুতি: আপনার পণ্য, সঠিকভাবে পরিচালিত।" },
     "hero.cta.primary":{ en: "Explore Services",      bn: "সেবা দেখুন" },
     "hero.cta.secondary":{ en: "Talk to a Specialist", bn: "বিশেষজ্ঞের সাথে কথা বলুন" },
 
