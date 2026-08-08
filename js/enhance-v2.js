@@ -6,25 +6,26 @@
   "use strict";
 
   /* ============================================================
-     QUOTE FORM CONFIG — the only thing you need to edit to go live
+     QUOTE FORM CONFIG
      ============================================================
 
-     1. Go to https://web3forms.com and enter the address that should
-        receive quote requests (use info@mozumderbd.net, not a personal
-        inbox). No account or password required.
-     2. Web3Forms emails you an access key. Paste it between the quotes
-        below and push. That's it — the form is live.
-     3. In the Web3Forms dashboard, restrict the key to mozumderbd.net so
-        nobody else can submit through it.
+     Submissions POST to Web3Forms, which emails them on to the recipient
+     configured for this key in the Web3Forms dashboard.
 
-     The key is designed to be public and is safe to commit — it only
-     works from your own domain and can only send mail to the address it
-     was issued for.
+     To change WHERE quote requests land, change the recipient in the
+     dashboard — not here. The key stays the same, so it needs no code
+     change and no deploy. Web3Forms sends a confirmation link to any new
+     recipient address before it starts delivering there.
 
-     Until a key is set, the form falls back to opening the visitor's mail
-     client (and says so plainly rather than claiming the request was sent).
+     The key is public by design and safe in a public repo: on its own it
+     can only send mail to the address it was issued for. Restricting it
+     to mozumderbd.net in the dashboard stops other sites using it.
+
+     If the key is ever blanked, the form degrades to opening the
+     visitor's mail client and says so, rather than claiming the request
+     was sent.
   */
-  const WEB3FORMS_KEY = "";                                // <-- paste key here
+  const WEB3FORMS_KEY = "dd5fce32-ec10-44dc-8eae-d122513fc946";
   const WEB3FORMS_URL = "https://api.web3forms.com/submit";
   const QUOTE_EMAIL   = "info@mozumderbd.net";             // mailto fallback recipient
 
