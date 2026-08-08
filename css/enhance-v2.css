@@ -421,3 +421,36 @@ body.lang-bn .lead {
 @media print {
   .fab-stack, .lang-switch, .nav-cta, .nav-toggle { display: none !important; }
 }
+
+/* ---------- Legibility over the dark hero ---------- */
+/* main.css declares a dark colour directly on .brand, .nav-menu a and the
+   h1..h5 group. A direct declaration beats the light colour these would
+   otherwise inherit from .inner-hero (and the dark home hero), so at
+   scroll-top they rendered near-black on near-black — measured between
+   1.03:1 and 1.12:1 against the 4.5:1 minimum. */
+
+/* The brand sits in the header bar at every width, so it needs lightening
+   at every width while the header is transparent. */
+.site-header:not(.is-solid) .brand { color: #fff; }
+
+/* The nav links only sit on the hero above the mobile breakpoint. Below it
+   .nav-menu becomes a fixed white panel, where the dark colours are right. */
+@media (min-width: 721px) {
+  .site-header:not(.is-solid) .nav-menu a { color: rgba(255,255,255,.92); }
+  .site-header:not(.is-solid) .nav-menu a:hover,
+  .site-header:not(.is-solid) .nav-menu a.active { color: var(--gold-bright, #ffb547); }
+}
+
+/* Inner-page headline: inherits #fff from .inner-hero, but the element-level
+   h1 rule overrides inheritance regardless of specificity. */
+.inner-hero h1 { color: #fff; }
+
+/* Once the header goes solid white, gold-dark only reaches 2.80:1. This
+   darker gold keeps the accent and clears AA at 5.23:1. */
+.site-header.is-solid .nav-menu a:hover,
+.site-header.is-solid .nav-menu a.active { color: #9a5f0c; }
+
+/* .crumbs is inline-flex, so the eyebrow pill lands flush beside it rather
+   than under it — which is what its own margin-bottom was written for.
+   Make it a block-level flex row so the pill drops to the next line. */
+.inner-hero .crumbs { display: flex; width: fit-content; }
