@@ -6,9 +6,9 @@
 /* ---------- Design tokens ---------- */
 :root {
   /* Brand */
-  --ink: #0a1f4d;
-  --ink-deep: #061638;
-  --ink-soft: #13306b;
+  --ink: #123a75;
+  --ink-deep: #0a2352;   /* lifted from #061638 — the near-black navy read too heavy */
+  --ink-soft: #1b4b8f;
   --gold: #f4a83c;
   --gold-bright: #ffb547;
   --gold-dark: #d48b1e;
