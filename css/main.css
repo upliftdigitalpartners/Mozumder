@@ -12,6 +12,7 @@
   --gold: #f4a83c;
   --gold-bright: #ffb547;
   --gold-dark: #d48b1e;
+  --gold-text: #9a5f0c;   /* eyebrow/link gold on light surfaces: 4.6-5.2:1 */
 
   /* Surfaces */
   --white: #ffffff;
@@ -23,7 +24,7 @@
   /* Text */
   --text: #0b1220;
   --text-muted: #4b5668;
-  --text-soft: #8a94a6;
+  --text-soft: #667082;   /* 4.99:1 on white — #8a94a6 only reached 3.06:1 */
 
   /* System */
   --radius-sm: 6px;
@@ -95,7 +96,7 @@ p  { margin: 0 0 1em; color: var(--text-muted); }
   font-family: var(--font-display);
   font-size: .78rem; font-weight: 700; letter-spacing: .22em;
   text-transform: uppercase;
-  color: var(--gold-dark);
+  color: var(--gold-text);
 }
 .eyebrow::before {
   content: ""; display: inline-block; width: 28px; height: 2px;
@@ -192,8 +193,8 @@ p  { margin: 0 0 1em; color: var(--text-muted); }
   border-radius: 8px;
   transition: color .2s var(--ease), background .2s var(--ease);
 }
-.nav-menu a:hover { color: var(--gold-dark); }
-.nav-menu a.active { color: var(--gold-dark); }
+.nav-menu a:hover { color: var(--gold-text); }
+.nav-menu a.active { color: var(--gold-text); }
 .nav-menu a.active::after {
   content: ""; position: absolute; left: 14px; right: 14px; bottom: 4px;
   height: 2px; background: var(--gold); border-radius: 2px;
@@ -635,7 +636,9 @@ a.service-card { display: flex; flex-direction: column; justify-content: space-b
 .site-footer ul a:hover, .site-footer address a:hover { color: var(--gold-bright); }
 .site-footer .brand { color: var(--white); margin-bottom: 16px; }
 .site-footer .brand small { color: rgba(255,255,255,.6); }
-.site-footer .tag { max-width: 340px; font-size: .95rem; }
+/* Inherited the global dark-grey p colour and landed on navy at 2.40:1.
+   Matches the footer links now. */
+.site-footer .tag { max-width: 340px; font-size: .95rem; color: rgba(255,255,255,.75); }
 .footer-bottom {
   border-top: 1px solid rgba(255,255,255,.08);
   padding: 24px 0;
@@ -692,7 +695,7 @@ a.service-card { display: flex; flex-direction: column; justify-content: space-b
 .office-card p { margin: 0; font-size: .96rem; }
 .office-card address { font-style: normal; color: var(--text-muted); font-size: .96rem; line-height: 1.7; margin-top: 10px; }
 .office-card address a { color: var(--ink-deep); font-weight: 600; }
-.office-card address a:hover { color: var(--gold-dark); }
+.office-card address a:hover { color: var(--gold-text); }
 
 .contact-form {
   background: var(--white); border: 1px solid var(--hairline);

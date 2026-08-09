@@ -445,10 +445,11 @@ body.lang-bn .lead {
    h1 rule overrides inheritance regardless of specificity. */
 .inner-hero h1 { color: #fff; }
 
-/* Once the header goes solid white, gold-dark only reaches 2.80:1. This
-   darker gold keeps the accent and clears AA at 5.23:1. */
+/* Now folded into --gold-text in main.css, which every eyebrow and light-surface
+   link uses. Kept as an explicit override so the solid header wins over the
+   transparent-header rule above it. */
 .site-header.is-solid .nav-menu a:hover,
-.site-header.is-solid .nav-menu a.active { color: #9a5f0c; }
+.site-header.is-solid .nav-menu a.active { color: var(--gold-text); }
 
 /* .crumbs is inline-flex, so the eyebrow pill lands flush beside it rather
    than under it — which is what its own margin-bottom was written for.
