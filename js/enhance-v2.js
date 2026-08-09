@@ -104,8 +104,11 @@
 
     // Options
     "svc.transport":  { en: "Transportation",          bn: "পরিবহন" },
-    "svc.freight":    { en: "Sea & Air Freight",       bn: "সমুদ্র ও আকাশ ফ্রেইট" },
     "svc.customs":    { en: "Customs Clearing",        bn: "কাস্টমস ক্লিয়ারিং" },
+    "svc.forwarding": { en: "Freight Forwarding",      bn: "ফ্রেইট ফরওয়ার্ডিং" },
+    "svc.shipagent":  { en: "Shipping Agent",          bn: "শিপিং এজেন্ট" },
+    "svc.distribution": { en: "Distribution",          bn: "বিতরণ" },
+    "svc.imports":    { en: "Exclusive Imports",       bn: "এক্সক্লুসিভ আমদানি" },
     "svc.warehouse":  { en: "Warehousing",             bn: "গুদামজাতকরণ" },
     "svc.heavy":      { en: "Heavy Equipment",         bn: "ভারী যন্ত্রপাতি" },
     "svc.corporate":  { en: "Corporate Supply",        bn: "কর্পোরেট সরবরাহ" },

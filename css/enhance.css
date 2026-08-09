@@ -256,14 +256,10 @@ body.is-ready .hero-img-layer { transform: scale(1); }
 .marquee-logo {
   height: 42px; width: auto; max-width: 150px;
   object-fit: contain;
-  filter: grayscale(100%) contrast(.9) brightness(.5);
-  opacity: .7;
-  transition: filter .35s var(--ease-out-quart), opacity .35s var(--ease-out-quart);
+  opacity: .92;
+  transition: opacity .35s var(--ease-out-quart);
 }
-.marquee-item:hover .marquee-logo {
-  filter: none;
-  opacity: 1;
-}
+.marquee-item:hover .marquee-logo { opacity: 1; }
 
 /* ---------- SERVICES: richer cards ---------- */
 .service-card {
