@@ -418,7 +418,7 @@ body.is-ready .hero-img-layer { transform: scale(1); }
 .site-footer ul a:hover { color: var(--gold-bright); }
 
 /* ---------- Reveal: upgrade motion ---------- */
-.reveal {
+.js .reveal {
   transform: translateY(28px) scale(.985);
   filter: blur(2px);
   transition:
@@ -426,7 +426,7 @@ body.is-ready .hero-img-layer { transform: scale(1); }
     transform .85s var(--ease-out-quart),
     filter .6s var(--ease-out-quart);
 }
-.reveal.in { transform: none; filter: none; }
+.js .reveal.in { transform: none; filter: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { filter: none; }

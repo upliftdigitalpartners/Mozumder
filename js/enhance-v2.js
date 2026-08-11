@@ -84,10 +84,10 @@
                         bn: "আমরা ১ কার্যদিবসের মধ্যে উত্তর দিই।" },
     "q.success":      { en: "Thanks! Your request is in. We'll respond within one business day.",
                         bn: "ধন্যবাদ! আপনার অনুরোধ পেয়েছি। এক কার্যদিবসের মধ্যে উত্তর দেব।" },
-    "q.error":        { en: "Something went wrong. Please call us at +880 1979-628953.",
+    "q.error":        { en: "Something went wrong. Please call us at +880 1711-885411.",
                         bn: "কিছু ভুল হয়েছে। অনুগ্রহ করে কল করুন: +৮৮০ ১৯৭৯-৬২৮৯৫৩।" },
     "q.sending":      { en: "Sending…",              bn: "পাঠানো হচ্ছে…" },
-    "q.fallback":     { en: "Your email app should now be open with the request ready to send — press send to reach us. If nothing opened, call +880 1979-628953.",
+    "q.fallback":     { en: "Your email app should now be open with the request ready to send — press send to reach us. If nothing opened, call +880 1711-885411.",
                         bn: "আপনার ইমেইল অ্যাপ খুলে অনুরোধটি প্রস্তুত হয়ে যাওয়ার কথা — পাঠাতে সেন্ড চাপুন। কিছু না খুললে কল করুন: +৮৮০ ১৯৭৯-৬২৮৯৫৩।" },
 
     "q.aside.h":      { en: "Why shippers choose Mozumder",
@@ -100,10 +100,11 @@
     "q.bul.2.p":      { en: "No hidden fees. Line-item quotes.", bn: "কোনো গোপন ফি নেই। বিস্তারিত কোট।" },
     "q.bul.3.h":      { en: "Nationwide coverage",   bn: "সারাদেশে পরিষেবা" },
     "q.bul.3.p":      { en: "All 64 districts, port-to-site.", bn: "৬৪ জেলা, পোর্ট থেকে সাইট পর্যন্ত।" },
-    "q.tel":          { en: "Or call +880 1979-628953", bn: "অথবা কল করুন +৮৮০ ১৯৭৯-৬২৮৯৫৩" },
+    "q.tel":          { en: "Or call +880 1711-885411", bn: "অথবা কল করুন +৮৮০ ১৯৭৯-৬২৮৯৫৩" },
 
     // Options
-    "svc.transport":  { en: "Transportation",          bn: "পরিবহন" },
+    "svc.logistics":  { en: "Logistics Service",       bn: "লজিস্টিকস সার্ভিস" },
+    "svc.transport":  { en: "Inland Transportation",   bn: "অভ্যন্তরীণ পরিবহন" },
     "svc.customs":    { en: "Customs Clearing",        bn: "কাস্টমস ক্লিয়ারিং" },
     "svc.forwarding": { en: "Freight Forwarding",      bn: "ফ্রেইট ফরওয়ার্ডিং" },
     "svc.shipagent":  { en: "Shipping Agent",          bn: "শিপিং এজেন্ট" },

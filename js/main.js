@@ -60,6 +60,8 @@
   } else {
     revealItems.forEach(el => el.classList.add('in'));
   }
+  // Tell the head-script failsafe we got here, so it leaves .js in place.
+  document.documentElement.classList.add('reveal-ready');
 
   /* --- Stat count-up --- */
   const stats = document.querySelectorAll('[data-count]');

@@ -12,6 +12,18 @@
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/enhance.css" />
   <link rel="stylesheet" href="css/enhance-v2.css" />
+  <script>
+    /* Reveal animations start at opacity:0 and are switched on by main.js.
+       If the script is blocked or fails, that would leave the whole page
+       invisible — so only arm the effect when JS is alive, and disarm it if
+       main.js never reports in. */
+    (function (d) {
+      d.classList.add('js');
+      setTimeout(function () {
+        if (!d.classList.contains('reveal-ready')) d.classList.remove('js');
+      }, 2500);
+    })(document.documentElement);
+  </script>
 </head>
 <body>
 <section class="page-hero" style="min-height: 100vh; display: flex; align-items: center;">

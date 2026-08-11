@@ -13,6 +13,18 @@
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/enhance.css" />
   <link rel="stylesheet" href="css/enhance-v2.css" />
+  <script>
+    /* Reveal animations start at opacity:0 and are switched on by main.js.
+       If the script is blocked or fails, that would leave the whole page
+       invisible — so only arm the effect when JS is alive, and disarm it if
+       main.js never reports in. */
+    (function (d) {
+      d.classList.add('js');
+      setTimeout(function () {
+        if (!d.classList.contains('reveal-ready')) d.classList.remove('js');
+      }, 2500);
+    })(document.documentElement);
+  </script>
 </head>
 <body>
 
@@ -72,6 +84,10 @@
         <div class="fimg"><img src="assets/fleet/tipper.svg" alt="Illustration of a tipper" width="220" height="120" loading="lazy"/></div>
         <div class="fbody"><span>Bulk</span><h4>Tipper</h4></div>
       </a>
+      <a class="fleet-card reveal" href="contact.html">
+        <div class="fimg"><img src="assets/fleet/covered-van.svg" alt="Illustration of a 23 feet covered van" width="220" height="120" loading="lazy"/></div>
+        <div class="fbody"><span>Covered</span><h4>23ft Covered Van</h4></div>
+      </a>
     </div>
   </div>
 </section>
@@ -118,7 +134,7 @@
         <div class="num">40<span class="plus">ft</span></div><div class="label">Trailer (4 &amp; 5 axle)</div>
       </div>
       <div class="stat-card reveal delay-2">
-        <div class="num">30<span class="plus">T</span></div><div class="label">Flatbed capacity</div>
+        <div class="num">23<span class="plus">ft</span></div><div class="label">Covered van</div>
       </div>
       <div class="stat-card reveal delay-3">
         <div class="num">12<span class="plus"></span></div><div class="label">Wheeler / prime mover</div>
@@ -162,12 +178,12 @@
       <div>
         <h5>Services</h5>
         <ul>
-          <li><a href="services.html">Transportation</a></li>
-          <li><a href="services.html">Customs Clearing &amp; Forwarding</a></li>
-          <li><a href="services.html">Freight Forwarding</a></li>
+          <li><a href="services.html">Logistics Service</a></li>
+          <li><a href="services.html">Inland Transportation</a></li>
           <li><a href="services.html">Shipping Agent</a></li>
-          <li><a href="services.html">Heavy Equipment Rental</a></li>
-          <li><a href="services.html">Distribution</a></li>
+          <li><a href="services.html">Freight Forwarding</a></li>
+          <li><a href="services.html">Customs Clearing &amp; Forwarding</a></li>
+          <li><a href="services.html">Corporate Supply</a></li>
         </ul>
       </div>
       <div>
