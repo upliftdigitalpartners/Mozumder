@@ -14,6 +14,18 @@
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/enhance.css" />
   <link rel="stylesheet" href="css/enhance-v2.css" />
+  <script>
+    /* Reveal animations start at opacity:0 and are switched on by main.js.
+       If the script is blocked or fails, that would leave the whole page
+       invisible — so only arm the effect when JS is alive, and disarm it if
+       main.js never reports in. */
+    (function (d) {
+      d.classList.add('js');
+      setTimeout(function () {
+        if (!d.classList.contains('reveal-ready')) d.classList.remove('js');
+      }, 2500);
+    })(document.documentElement);
+  </script>
 </head>
 <body>
 
@@ -86,7 +98,8 @@
           <div class="field full">
             <label for="q-service" data-i18n="q.service">Service needed</label>
             <select id="q-service" name="service" required>
-              <option value="Transportation" data-i18n="svc.transport">Transportation</option>
+              <option value="Logistics Service" data-i18n="svc.logistics">Logistics Service</option>
+              <option value="Inland Transportation" data-i18n="svc.transport">Inland Transportation</option>
               <option value="Customs Clearing" data-i18n="svc.customs">Customs Clearing</option>
               <option value="Freight Forwarding" data-i18n="svc.forwarding">Freight Forwarding</option>
               <option value="Shipping Agent" data-i18n="svc.shipagent">Shipping Agent</option>
@@ -133,7 +146,7 @@
         </div>
 
         <div class="quote-success" data-i18n="q.success">Thanks! Your request is in. We'll respond within one business day.</div>
-        <div class="quote-error" data-i18n="q.error">Something went wrong. Please call us at +880 1979-628953.</div>
+        <div class="quote-error" data-i18n="q.error">Something went wrong. Please call us at +880 1711-885411.</div>
       </form>
 
       <aside class="quote-side">
@@ -153,9 +166,9 @@
             <span><b data-i18n="q.bul.3.h">Nationwide coverage</b><span data-i18n="q.bul.3.p">All 64 districts, port-to-site.</span></span>
           </li>
         </ul>
-        <a class="tel-line" href="tel:+8801979628953">
+        <a class="tel-line" href="tel:+8801711885411">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.28-1.28a2 2 0 0 1 2.11-.45c.9.35 1.84.59 2.8.72A2 2 0 0 1 22 16.92z"/></svg>
-          <span data-i18n="q.tel">Or call +880 1979-628953</span>
+          <span data-i18n="q.tel">Or call +880 1711-885411</span>
         </a>
       </aside>
     </div>
@@ -218,12 +231,12 @@
       <div>
         <h5>Services</h5>
         <ul>
-          <li><a href="services.html">Transportation</a></li>
-          <li><a href="services.html">Customs Clearing &amp; Forwarding</a></li>
-          <li><a href="services.html">Freight Forwarding</a></li>
+          <li><a href="services.html">Logistics Service</a></li>
+          <li><a href="services.html">Inland Transportation</a></li>
           <li><a href="services.html">Shipping Agent</a></li>
-          <li><a href="services.html">Heavy Equipment Rental</a></li>
-          <li><a href="services.html">Distribution</a></li>
+          <li><a href="services.html">Freight Forwarding</a></li>
+          <li><a href="services.html">Customs Clearing &amp; Forwarding</a></li>
+          <li><a href="services.html">Corporate Supply</a></li>
         </ul>
       </div>
       <div>
