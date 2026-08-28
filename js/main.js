@@ -24,9 +24,19 @@
 
   /* --- Mobile nav toggle --- */
   if (navToggle && navMenu) {
-    navToggle.addEventListener('click', () => {
-      const open = navMenu.classList.toggle('open');
+    const setNav = (open) => {
+      navMenu.classList.toggle('open', open);
       navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    navToggle.addEventListener('click', () => {
+      setNav(!navMenu.classList.contains('open'));
+    });
+    // The open menu could only be dismissed by pointing at the toggle again,
+    // which leaves a keyboard user with no way out of it.
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape' || !navMenu.classList.contains('open')) return;
+      setNav(false);
+      navToggle.focus();
     });
     navMenu.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => {

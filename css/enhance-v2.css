@@ -665,3 +665,46 @@ a.alert-text:hover { border-bottom-color: var(--alert-accent, var(--gold)); colo
 @media (prefers-reduced-motion: no-preference) {
   .hero-inner, .inner-hero, .page-hero { transition: padding-top .5s var(--ease); }
 }
+
+/* ---------- Keyboard access ---------- */
+
+/* Tabbing to something just below the fold scrolled it flush to the top of the
+   viewport, i.e. underneath the fixed header — measured landing at 17px against
+   an 82px header. This reserves the header's height for focus scrolling and
+   anchor jumps alike. */
+html { scroll-padding-top: calc(var(--nav-h) + 18px); }
+.has-alert html, html.has-alert { scroll-padding-top: calc(var(--nav-h) + 82px); }
+
+/* Every page put the seven nav links ahead of the content, so reaching the page
+   itself took at least eight tab stops. */
+.skip-link {
+  position: fixed; top: 10px; left: 10px; z-index: 100;
+  transform: translateY(-160%);
+  background: var(--gold); color: var(--ink-deep);
+  font-family: var(--font-display); font-weight: 700; font-size: .92rem;
+  padding: 12px 20px; border-radius: 999px;
+  box-shadow: var(--shadow);
+  transition: transform .22s var(--ease);
+}
+.skip-link:focus { transform: none; outline: 3px solid var(--ink-deep); outline-offset: 2px; }
+#main:focus { outline: none; }   /* it is a scroll target, not a control */
+
+/* The browser default ring is near-black, which is fine on the light pages and
+   weak on the navy ones. Set it explicitly in both directions instead of
+   depending on each browser's adaptive default. */
+:focus-visible {
+  outline: 3px solid var(--ink-deep);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+.hero :focus-visible,
+.inner-hero :focus-visible,
+.page-hero :focus-visible,
+.cta-band :focus-visible,
+.site-footer :focus-visible,
+.alert-bar :focus-visible,
+.fab-stack :focus-visible,
+.service-card.featured:focus-visible,
+.site-header:not(.is-solid) :focus-visible {
+  outline-color: var(--gold-bright);
+}
