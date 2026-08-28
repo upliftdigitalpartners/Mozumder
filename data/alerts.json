@@ -1,0 +1,29 @@
+{
+  "_readme": [
+    "Operational notices shown in the strip under the site header.",
+    "Edit this file only — no code change is needed, and the site picks it up on the next load.",
+    "",
+    "Each entry:",
+    "  id     unique short string. Changing it makes the notice reappear for people who dismissed it.",
+    "  level  'info' | 'warn' | 'urgent'  — controls the colour of the dot and bar.",
+    "  text   one sentence. Keep it under about 120 characters so it fits on a phone.",
+    "  url    optional. Omit the field entirely if there is nothing to link to.",
+    "  from   YYYY-MM-DD. Not shown before this date.",
+    "  until  YYYY-MM-DD. Hidden from the START of this date, so use the day AFTER it should stop.",
+    "",
+    "Anything outside its from/until window is skipped, so an expired notice disappears",
+    "on its own rather than sitting on the site months later. Leave 'alerts' as an empty",
+    "list when there is nothing to say — the strip then does not render at all.",
+    "",
+    "Example of the shape (this key is ignored):"
+  ],
+  "_example": {
+    "id": "ctg-congestion-2026-09",
+    "level": "warn",
+    "text": "Chattogram Port: berth waiting extended to 4 days. Allow extra transit time on export bookings.",
+    "url": "contact.html",
+    "from": "2026-09-01",
+    "until": "2026-09-30"
+  },
+  "alerts": []
+}

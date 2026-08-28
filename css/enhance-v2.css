@@ -559,3 +559,109 @@ body.lang-bn .lead {
 }
 .ac-opt.is-active .ac-name { color: var(--ink); }
 @media (max-width: 720px) { .ac-list { max-height: 232px; min-width: 100%; } }
+
+/* ---------- Operational notices (js/alerts.js) ----------
+   A contained card that floats below the header rather than a full-bleed
+   band. Full-bleed coloured bars read as browser chrome; this reads as the
+   site. Level is carried by a small chip and a hairline edge, so the panel
+   itself stays the brand navy instead of turning brown or red. */
+.alert-bar {
+  position: fixed; top: calc(var(--nav-h) + 10px); left: 0; right: 0; z-index: 45;
+  padding-inline: var(--gutter);
+  transform: translateY(-14px); opacity: 0; pointer-events: none;
+  transition: transform .5s var(--ease), opacity .38s var(--ease);
+}
+.alert-bar.is-open { transform: none; opacity: 1; pointer-events: auto; }
+
+.alert-inner {
+  width: 100%; max-width: var(--container); margin-inline: auto;
+  display: flex; align-items: center; gap: 14px;
+  padding: 11px 12px 11px 16px;
+  border-radius: 14px;
+  background: rgba(10, 35, 82, .93);
+  -webkit-backdrop-filter: saturate(150%) blur(10px);
+  backdrop-filter: saturate(150%) blur(10px);
+  border: 1px solid rgba(255,255,255,.13);
+  box-shadow: 0 18px 40px -22px rgba(6,18,44,.85), 0 2px 6px rgba(6,18,44,.28);
+  position: relative; overflow: hidden;
+}
+/* Level shows as a bright edge on the leading side, not as a wash of colour. */
+.alert-inner::before {
+  content: ""; position: absolute; inset: 0 auto 0 0; width: 3px;
+  background: var(--alert-accent, var(--gold));
+}
+
+.alert-chip {
+  flex: none;
+  font-family: var(--font-display); font-size: .64rem; font-weight: 800;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--alert-accent, var(--gold));
+  border: 1px solid color-mix(in srgb, var(--alert-accent, var(--gold)) 40%, transparent);
+  background: color-mix(in srgb, var(--alert-accent, var(--gold)) 12%, transparent);
+  padding: 4px 9px; border-radius: 999px;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.alert-chip::before {
+  content: ""; width: 5px; height: 5px; border-radius: 999px; flex: none;
+  background: currentColor;
+  animation: alert-pulse 2.6s var(--ease) infinite;
+}
+
+.alert-slot { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0;
+  transition: opacity .22s var(--ease); }
+.alert-slot.is-swapping { opacity: 0; }
+.alert-text {
+  color: rgba(255,255,255,.92); font-size: .9rem; line-height: 1.45;
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+a.alert-text { text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.28);
+  padding-bottom: 1px; transition: border-color .2s var(--ease), color .2s var(--ease); }
+a.alert-text:hover { border-bottom-color: var(--alert-accent, var(--gold)); color: #fff; }
+
+.alert-count {
+  flex: none; font-size: .7rem; letter-spacing: .1em;
+  color: rgba(255,255,255,.42); font-variant-numeric: tabular-nums;
+}
+.alert-close {
+  flex: none; width: 28px; height: 28px; border-radius: 8px;
+  display: grid; place-items: center; color: rgba(255,255,255,.55);
+  transition: background .2s var(--ease), color .2s var(--ease);
+}
+.alert-close:hover { background: rgba(255,255,255,.12); color: var(--white); }
+
+.alert-bar[data-level="info"]   { --alert-accent: #6fb2ff; }
+.alert-bar[data-level="warn"]   { --alert-accent: var(--gold-bright); }
+.alert-bar[data-level="urgent"] { --alert-accent: #ff7b7b; }
+
+@keyframes alert-pulse {
+  0%   { box-shadow: 0 0 0 0   currentColor; opacity: 1; }
+  70%  { box-shadow: 0 0 0 6px transparent;  opacity: .75; }
+  100% { box-shadow: 0 0 0 0   transparent;  opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .alert-bar { transition: none; }
+  .alert-chip::before { animation: none; }
+}
+@media (max-width: 720px) {
+  .alert-bar { top: calc(var(--nav-h) + 8px); }
+  .alert-inner { align-items: flex-start; gap: 10px; padding: 10px 8px 10px 13px; border-radius: 12px; }
+  .alert-slot { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .alert-text { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; font-size: .84rem; }
+  .alert-chip { font-size: .6rem; padding: 3px 8px; }
+}
+
+/* A live notice would otherwise sit on top of the hero eyebrow. Push the hero
+   content down by the card's height instead, so the two never collide. The
+   shift happens once, as the card slides in, and reads as part of that. */
+.has-alert .hero-inner { padding-top: 64px; }
+.has-alert .inner-hero { padding-top: 204px; }
+.has-alert .page-hero  { padding-top: calc(var(--nav-h) + 72px + 64px); }
+@media (max-width: 720px) {
+  .has-alert .hero-inner { padding-top: 92px; }
+  .has-alert .inner-hero { padding-top: 232px; }
+  .has-alert .page-hero  { padding-top: calc(var(--nav-h) + 72px + 92px); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-inner, .inner-hero, .page-hero { transition: padding-top .5s var(--ease); }
+}
