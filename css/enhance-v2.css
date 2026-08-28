@@ -455,3 +455,74 @@ body.lang-bn .lead {
    than under it — which is what its own margin-bottom was written for.
    Make it a block-level flex row so the pill drops to the next line. */
 .inner-hero .crumbs { display: flex; width: fit-content; }
+
+/* =========================================================
+   Motion layer (js/motion.js)
+   Only engages when that script is alive; every rule below is
+   additive so the page is unchanged if it never runs.
+   ========================================================= */
+
+/* Cards lean a touch toward the pointer and pick up a soft highlight where
+   it sits. --px/--py are written by motion.js, 0..1 across the card. */
+.motion-ready .service-card,
+.motion-ready .concern-card,
+.motion-ready .fleet-card,
+.motion-ready .stat-card {
+  --px: .5; --py: .5;
+  transition: transform .5s var(--ease), box-shadow .5s var(--ease), border-color .35s var(--ease);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .motion-ready .service-card:hover,
+  .motion-ready .concern-card:hover,
+  .motion-ready .fleet-card:hover {
+    transform:
+      translateY(-6px)
+      rotateX(calc((var(--py) - .5) * -3deg))
+      rotateY(calc((var(--px) - .5) * 4deg));
+  }
+  .motion-ready .services-grid,
+  .motion-ready .concerns-grid,
+  .motion-ready .fleet-grid { perspective: 1200px; }
+
+  /* Light follows the cursor across the card face. */
+  .motion-ready .service-card::before,
+  .motion-ready .concern-card::before {
+    content: ""; position: absolute; inset: 0; z-index: 0;
+    border-radius: inherit; pointer-events: none;
+    opacity: 0; transition: opacity .4s var(--ease);
+    background: radial-gradient(
+      420px circle at calc(var(--px) * 100%) calc(var(--py) * 100%),
+      rgba(244,168,60,.16), transparent 62%);
+  }
+  .motion-ready .service-card:hover::before,
+  .motion-ready .concern-card:hover::before { opacity: 1; }
+  .motion-ready .service-card.featured:hover::before {
+    background: radial-gradient(
+      420px circle at calc(var(--px) * 100%) calc(var(--py) * 100%),
+      rgba(255,181,71,.20), transparent 62%);
+  }
+}
+
+/* Reveals get a longer, softer curve while inertial scrolling is on, so the
+   two motions read as one system rather than two competing speeds. */
+.has-smooth-scroll .reveal {
+  transition-duration: .95s, .95s, .7s;
+  transition-timing-function: cubic-bezier(.16, 1, .3, 1);
+}
+
+/* Nav and any overflow panel must keep native scrolling. */
+.nav-menu, .quote-form, .article-scroll { }
+.nav-menu.open { overscroll-behavior: contain; }
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-ready .service-card:hover,
+  .motion-ready .concern-card:hover,
+  .motion-ready .fleet-card:hover { transform: none; }
+  .motion-ready .service-card::before,
+  .motion-ready .concern-card::before { display: none; }
+}
+
+/* Our rAF loop owns the scroll position while it is active; leaving the CSS
+   smooth behaviour on would have the browser animating the same property at
+   the same time and the two cancel each other out. */
+.has-smooth-scroll { scroll-behavior: auto; }
