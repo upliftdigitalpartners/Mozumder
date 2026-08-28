@@ -526,3 +526,36 @@ body.lang-bn .lead {
    smooth behaviour on would have the browser animating the same property at
    the same time and the two cancel each other out. */
 .has-smooth-scroll { scroll-behavior: auto; }
+
+/* ---------- Origin / destination autocomplete (js/places.js) ---------- */
+.ac-wrap { position: relative; }
+.ac-list {
+  position: absolute; z-index: 30; left: 0; right: 0; top: calc(100% + 6px);
+  background: var(--white);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  max-height: 292px; overflow-y: auto;
+  overscroll-behavior: contain;
+  /* The field sits in a two-column grid and is narrow; let the list run wider
+     than its input so place names do not wrap onto three lines. */
+  min-width: max(100%, 310px);
+}
+.ac-opt {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 14px;
+  padding: 10px 14px; cursor: pointer;
+  border-bottom: 1px solid var(--hairline);
+}
+.ac-opt:last-child { border-bottom: 0; }
+.ac-opt.is-active, .ac-opt:hover { background: var(--surface); }
+.ac-name {
+  font-weight: 600; color: var(--ink-deep); font-size: .95rem;
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.ac-meta {
+  font-size: .72rem; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--text-soft); white-space: nowrap; flex: none;
+}
+.ac-opt.is-active .ac-name { color: var(--ink); }
+@media (max-width: 720px) { .ac-list { max-height: 232px; min-width: 100%; } }
