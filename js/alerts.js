@@ -68,18 +68,21 @@
 
     var i = 0, timer = null;
 
+    var LABEL = { info: "Notice", warn: "Advisory", urgent: "Urgent" };
+
     function paint() {
       var a = list[i];
-      bar.setAttribute("data-level", a.level || "info");
+      var level = LABEL[a.level] ? a.level : "info";
+      bar.setAttribute("data-level", level);
       slot.innerHTML = "";
-      var dot = document.createElement("span");
-      dot.className = "alert-dot";
-      dot.setAttribute("aria-hidden", "true");
+      var chip = document.createElement("span");
+      chip.className = "alert-chip";
+      chip.textContent = LABEL[level];
       var txt = a.url ? document.createElement("a") : document.createElement("span");
       if (a.url) txt.href = a.url;
       txt.className = "alert-text";
       txt.textContent = a.text;
-      slot.appendChild(dot);
+      slot.appendChild(chip);
       slot.appendChild(txt);
       if (list.length > 1) {
         var n = document.createElement("span");
