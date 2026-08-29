@@ -103,6 +103,11 @@
       var top = el.getBoundingClientRect().top + window.scrollY
               - (parseFloat(getComputedStyle(root).getPropertyValue("--nav-h")) || 82) - 12;
       scrollToY(top);
+      // Moving the viewport is only half of it: preventDefault above also
+      // cancels the browser's focus move, which is the entire point of a skip
+      // link. Put focus on the target explicitly.
+      if (!el.hasAttribute("tabindex")) el.setAttribute("tabindex", "-1");
+      el.focus({ preventScroll: true });
       history.pushState(null, "", id);
     });
 
