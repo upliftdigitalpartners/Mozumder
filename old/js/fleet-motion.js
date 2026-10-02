@@ -10,7 +10,7 @@
   if (!cards.length || !("IntersectionObserver" in window)) return;
   document.documentElement.classList.add("fx-managed");
 
-  var MEDIA = "media/fleet/";
+  var MEDIA = "../media/fleet/";
   var KINDS = ["skeletal", "flatbed", "lowbed", "tipper", "van", "tanker", "excavator", "crane", "tires"];
   var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var conn = navigator.connection || {};

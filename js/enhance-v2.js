@@ -114,6 +114,7 @@
   };
 
   let currentLang = "en";
+  const autoEn = new WeakMap();   // original English HTML of each auto block
 
   // Look up a string in the active language, falling back to English.
   function t(key) {
@@ -135,6 +136,19 @@
       if (el.tagName === "OPTION") el.textContent = rec[lang];
       else el.textContent = rec[lang];
     });
+    // Whole text blocks marked by tools/i18n_annotate.py. The English is
+    // read from the page itself the first time, so switching back restores
+    // it exactly; Bangla comes from js/i18n-bn.js (window.MZM_BN).
+    const BN = window.MZM_BN || {};
+    document.querySelectorAll("[data-i18n-auto]").forEach(el => {
+      if (!autoEn.has(el)) autoEn.set(el, el.innerHTML);
+      const bn = BN[el.getAttribute("data-i18n-auto")];
+      const html = lang === "bn" && bn ? bn : autoEn.get(el);
+      if (el.innerHTML !== html) el.innerHTML = html;
+    });
+    // The footer year lives inside a translated block; refill it after a swap.
+    document.querySelectorAll("[data-year]").forEach(el => { el.textContent = new Date().getFullYear(); });
+
     document.querySelectorAll("[data-i18n-ph]").forEach(el => {
       const k = el.getAttribute("data-i18n-ph");
       const rec = I18N[k];

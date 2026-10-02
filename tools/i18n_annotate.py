@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Mark every translatable text block on the /next/ pages for the Bangla toggle.
+"""Mark every translatable text block on the site pages for the Bangla toggle.
 
-Run from next/:  python3 tools/i18n_annotate.py [--write]
+Run from the repo root:  python3 tools/i18n_annotate.py [--write]
 
 A "text block" is the outermost element whose contents are only text and
 inline markup (links, bold, line breaks...). Each gets
