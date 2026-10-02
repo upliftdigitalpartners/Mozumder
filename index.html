@@ -7,10 +7,9 @@
   <meta name="description" content="Mozumder is Bangladesh&rsquo;s trusted logistics and transportation enterprise &mdash; inland transportation, shipping agency, freight forwarding, customs clearing and corporate supply." />
   <meta name="theme-color" content="#0a2352" />
   <link rel="icon" type="image/png" href="assets/logo-mark.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-latin-800-normal.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-latin-400-normal.woff2" crossorigin />
+  <link rel="stylesheet" href="css/fonts.css" />
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/enhance.css" />
   <link rel="stylesheet" href="css/enhance-v2.css" />
@@ -117,17 +116,17 @@
 <!-- =========== CINEMATIC STAGE (fixed; driven by js/home/home.js) =========== -->
 <div class="stage" aria-hidden="true">
   <div class="layer" data-layer="hero">
-    <video muted loop playsinline preload="none" poster="media/home/hero.jpg"
+    <video muted loop playsinline preload="none" data-poster="media/home/hero.jpg"
            data-src-lg="media/home/hero-lg.mp4" data-src-pt="media/home/hero-pt.mp4"></video>
   </div>
   <div class="layer" data-layer="sea" data-seq="sea" data-frames="72"><canvas class="seq"></canvas></div>
   <div class="layer" data-layer="port">
-    <video muted loop playsinline preload="none" poster="media/home/port.jpg"
+    <video muted loop playsinline preload="none" data-poster="media/home/port.jpg"
            data-src-lg="media/home/port-lg.mp4" data-src-pt="media/home/port-pt.mp4"></video>
   </div>
   <div class="layer" data-layer="handoff" data-seq="handoff" data-frames="72"><canvas class="seq"></canvas></div>
   <div class="layer" data-layer="road">
-    <video muted loop playsinline preload="none" poster="media/home/road.jpg"
+    <video muted loop playsinline preload="none" data-poster="media/home/road.jpg"
            data-src-lg="media/home/road-lg.mp4" data-src-pt="media/home/road-pt.mp4"></video>
   </div>
   <div class="layer" data-layer="rise" data-seq="rise" data-frames="72"><canvas class="seq"></canvas></div>
@@ -540,7 +539,7 @@
 <section class="section-sm">
   <div class="container">
     <div class="cta-band cta-video reveal">
-      <video class="cta-bg" muted loop playsinline preload="none" poster="media/home/hub.jpg" aria-hidden="true"
+      <video class="cta-bg" muted loop playsinline preload="none" data-poster="media/home/hub.jpg" aria-hidden="true"
              data-src-lg="media/home/hub-lg.mp4"></video>
       <div>
         <h2 data-i18n-auto="bbe8486b21">Have cargo to move? Let&rsquo;s talk logistics.</h2>

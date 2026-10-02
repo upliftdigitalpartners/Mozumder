@@ -14,7 +14,7 @@
   var KINDS = ["skeletal", "flatbed", "lowbed", "tipper", "van", "tanker", "excavator", "crane", "tires"];
   var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var conn = navigator.connection || {};
-  var useVideo = !conn.saveData;
+  var useVideo = !conn.saveData && !/(^|-)2g$|^3g$/.test(conn.effectiveType || "");
 
   function kindOf(card) {
     var svg = card.querySelector("svg.fx");
