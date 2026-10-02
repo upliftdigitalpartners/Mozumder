@@ -1,0 +1,144 @@
+/* =========================================================
+   Fleet card animations
+   Each vehicle illustration is inline SVG so its parts can move.
+   Base (un-animated) state of every part is the original pose,
+   so reduced-motion users see the static drawing.
+   ========================================================= */
+.fleet-card .fimg svg { width: 100%; height: 100%; transition: transform .6s var(--ease); }
+.fleet-card:hover .fimg svg { transform: scale(1.06); }
+
+/* Studio video layer (added by fleet-motion.js). The card switches to the
+   video's 16:9 frame; the line drawing stays underneath until the first
+   frame is ready, and remains as the fallback if the video fails. */
+.fleet-card .fimg.has-video { aspect-ratio: 16 / 9; padding: 5% 14%; position: relative; }
+.fleet-card .fimg video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0;
+  transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+.fleet-card .fimg.video-ready video { opacity: 1; }
+.fleet-card:hover .fimg video { transform: scale(1.04); }
+
+/* Off-screen cards pause (fleet-motion.js toggles .is-live). */
+.fx-managed .fleet-card:not(.is-live) .fx * { animation-play-state: paused; }
+
+/* ---- shared: driving ---- */
+.fx-road  { animation: fx-road .6s linear infinite; }
+.fx-wheel { transform-box: fill-box; transform-origin: center; animation: fx-spin 1.06s linear infinite reverse; }
+.fx-wheel.is-still { animation: none; }
+.fx-ride  { animation: fx-ride .5s ease-in-out infinite alternate; }
+.fx-wind  { animation: fx-wind .6s linear infinite; }
+@keyframes fx-road { to { stroke-dashoffset: -32; } }
+@keyframes fx-spin { to { transform: rotate(360deg); } }
+@keyframes fx-ride { to { transform: translateY(-.7px); } }
+@keyframes fx-wind { from { transform: translateX(0); opacity: .9; } to { transform: translateX(6px); opacity: 0; } }
+
+/* ---- skeletal trailer: container lowered onto the trailer ---- */
+.fx-skeletal .fx-drop  { animation: fx-drop 6.5s cubic-bezier(.45,0,.25,1) infinite; }
+.fx-skeletal .fx-cable { animation: fx-cable 6.5s cubic-bezier(.45,0,.25,1) infinite; }
+@keyframes fx-drop {
+  0%       { transform: translateY(-34px); opacity: 0; }
+  10%      { transform: translateY(-34px); opacity: 1; }
+  40%      { transform: translateY(0); }
+  43%      { transform: translateY(-1.5px); }
+  46%, 86% { transform: translateY(0); opacity: 1; }
+  95%,100% { transform: translateY(0); opacity: 0; }
+}
+@keyframes fx-cable {
+  0%       { transform: translateY(-34px); opacity: 0; }
+  10%      { transform: translateY(-34px); opacity: 1; }
+  40%, 50% { transform: translateY(0); opacity: 1; }
+  62%,100% { transform: translateY(-60px); opacity: 0; }
+}
+
+/* ---- flatbed: load drops, straps tighten ---- */
+.fx-flatbed .fx-drop  { animation: fx-drop 6.5s cubic-bezier(.45,0,.25,1) infinite -1.2s; }
+.fx-flatbed .fx-strap { transform-box: fill-box; transform-origin: 50% 100%; animation: fx-strap 6.5s ease-out infinite -1.2s; }
+@keyframes fx-strap {
+  0%, 48%  { transform: scaleY(0); opacity: 0; }
+  58%, 86% { transform: scaleY(1); opacity: 1; }
+  95%,100% { transform: scaleY(1); opacity: 0; }
+}
+
+/* ---- low bed: ramp folds down and up, beacon flashes ---- */
+.fx-lowbed .fx-ramp   { transform-box: view-box; transform-origin: 198px 78px; animation: fx-ramp 7s cubic-bezier(.5,0,.2,1) infinite; }
+.fx-lowbed .fx-beacon { animation: fx-beacon 1s steps(1) infinite; }
+@keyframes fx-ramp {
+  0%, 8%    { transform: rotate(-148deg); }
+  30%       { transform: rotate(4deg); }
+  34%, 68%  { transform: rotate(0); }
+  92%, 100% { transform: rotate(-148deg); }
+}
+@keyframes fx-beacon { 0% { opacity: 1; } 50% { opacity: .15; } }
+
+/* ---- tipper: body tips up, gravel pours ---- */
+.fx-tipper .fx-tip    { transform-box: view-box; transform-origin: 192px 84px; animation: fx-tip 6s cubic-bezier(.5,0,.3,1) infinite; }
+.fx-tipper .fx-gravel { animation: fx-gravel 6s linear infinite; }
+@keyframes fx-tip {
+  0%, 15%   { transform: rotate(-11.7deg); }
+  42%, 66%  { transform: rotate(4deg); }
+  90%, 100% { transform: rotate(-11.7deg); }
+}
+@keyframes fx-gravel {
+  0%, 44% { transform: translate(0,0); opacity: 0; }
+  46%     { transform: translate(0,0); opacity: 1; }
+  55%     { transform: translate(5px,15px); opacity: .9; }
+  56%     { transform: translate(5px,15px); opacity: 0; }
+  57%     { transform: translate(0,0); opacity: 0; }
+  58%     { transform: translate(0,0); opacity: 1; }
+  66%     { transform: translate(5px,15px); opacity: .9; }
+  67%,100%{ transform: translate(5px,15px); opacity: 0; }
+}
+
+/* ---- tanker: liquid sloshes ---- */
+.fx-liquid { animation: fx-liquid 1.6s linear infinite; }
+@keyframes fx-liquid {
+  0%   { transform: translate(0, 0); }
+  50%  { transform: translate(-12px, -1.5px); }
+  100% { transform: translate(-24px, 0); }
+}
+
+/* ---- excavator: dig, scoop, lift, dump ---- */
+.fx-excavator .fx-boom  { transform-box: view-box; transform-origin: 106px 70px; animation: fx-boom 6s cubic-bezier(.45,0,.3,1) infinite; }
+.fx-excavator .fx-stick { transform-box: view-box; transform-origin: 140px 40px; animation: fx-stick 6s cubic-bezier(.45,0,.3,1) infinite; }
+.fx-excavator .fx-dust  { animation: fx-dust 6s ease-out infinite; }
+@keyframes fx-boom {
+  0%        { transform: rotate(0); }
+  25%, 45%  { transform: rotate(8deg); }
+  70%, 85%  { transform: rotate(-10deg); }
+  100%      { transform: rotate(0); }
+}
+@keyframes fx-stick {
+  0%        { transform: rotate(0); }
+  25%       { transform: rotate(-15deg); }
+  45%, 70%  { transform: rotate(20deg); }
+  85%       { transform: rotate(-10deg); }
+  100%      { transform: rotate(0); }
+}
+@keyframes fx-dust {
+  0%, 30%  { transform: translateY(0); opacity: 0; }
+  36%      { transform: translateY(-3px); opacity: 1; }
+  50%,100% { transform: translateY(-9px); opacity: 0; }
+}
+
+/* ---- crane: boom luffs up, hook pays out ---- */
+.fx-crane .fx-luff  { transform-box: view-box; transform-origin: 98px 79px; animation: fx-luff 7s cubic-bezier(.45,0,.3,1) infinite; }
+.fx-crane .fx-cable { transform-box: fill-box; transform-origin: 50% 0; animation: fx-pay 7s cubic-bezier(.45,0,.3,1) infinite; }
+.fx-crane .fx-hook  { animation: fx-hook 7s cubic-bezier(.45,0,.3,1) infinite; }
+/* The hook hangs plumb: counter-rotate it about the boom tip. */
+.fx-crane .fx-hang  { transform-box: view-box; transform-origin: 206px 38px; animation: fx-hang 7s cubic-bezier(.45,0,.3,1) infinite; }
+@keyframes fx-luff { 0%, 8% { transform: rotate(0); } 38%, 74% { transform: rotate(-8deg); } 100% { transform: rotate(0); } }
+@keyframes fx-hang { 0%, 8% { transform: rotate(0); } 38%, 74% { transform: rotate(8deg); } 100% { transform: rotate(0); } }
+@keyframes fx-pay  { 0%, 40% { transform: scaleY(1); } 58%, 72% { transform: scaleY(2.2); } 90%,100% { transform: scaleY(1); } }
+@keyframes fx-hook { 0%, 40% { transform: translateY(0); } 58%, 72% { transform: translateY(21.6px); } 90%,100% { transform: translateY(0); } }
+
+/* ---- tires: big one spins, small one rolls back and forth ---- */
+.fx-tires .fx-spin    { transform-box: fill-box; transform-origin: center; animation: fx-spin 9s linear infinite; }
+.fx-tires .fx-roll    { animation: fx-roll 5s ease-in-out infinite alternate; }
+.fx-tires .fx-spin-sm { transform-box: fill-box; transform-origin: center; animation: fx-roll-spin 5s ease-in-out infinite alternate; }
+@keyframes fx-roll      { from { transform: translateX(-14px); } to { transform: translateX(10px); } }
+@keyframes fx-roll-spin { from { transform: rotate(-33deg); } to { transform: rotate(24deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fx * { animation: none !important; }
+}
