@@ -25,3 +25,18 @@ WebM (VP9) per vehicle at 960px, plus a JPG still. They were made from the
 raw AI renders on the `media-raw` branch (the last 0.8s of each clip is
 cross-faded into the first so it loops without a jump). `js/fleet-motion.js`
 attaches them to the cards; the animated line drawings stay as the fallback.
+
+`media/home/` holds the homepage footage, made from the `reference` renders on
+`media-raw`:
+
+- `hero`, `port`, `road`, `hub` — seamless-loop MP4s in two sizes (`-lg`
+  1280px for desktop, `-sm` 720px for phones) plus a JPG poster each.
+- `seq/sea`, `seq/handoff`, `seq/rise` — 72-frame WebP sequences (`lg`/`sm`)
+  that scrub with the scroll position.
+
+## Homepage
+
+`index.html` is a scroll-driven film. `js/home/home.js` keeps a fixed stage of
+media layers behind the chapter sections and crossfades them as you scroll;
+`js/home/network-map.js` is the Three.js map of Bangladesh that takes over at
+the end of the drone rise. Three.js r186 is vendored in `vendor/three/`.

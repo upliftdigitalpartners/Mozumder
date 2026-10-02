@@ -74,6 +74,9 @@
       }, 2500);
     })(document.documentElement);
   </script>
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="preload" as="image" href="media/home/hero.jpg" />
+  <script type="importmap">{"imports":{"three":"./vendor/three/three.module.min.js","three/addons/":"./vendor/three/addons/"}}</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -110,167 +113,167 @@
   </div>
 </header>
 
+
+<!-- =========== CINEMATIC STAGE (fixed; driven by js/home/home.js) =========== -->
+<div class="stage" aria-hidden="true">
+  <div class="layer" data-layer="hero">
+    <video muted loop playsinline preload="none" poster="media/home/hero.jpg"
+           data-src-lg="media/home/hero-lg.mp4" data-src-sm="media/home/hero-sm.mp4"></video>
+  </div>
+  <div class="layer" data-layer="sea" data-seq="sea" data-frames="72"><canvas class="seq"></canvas></div>
+  <div class="layer" data-layer="port">
+    <video muted loop playsinline preload="none" poster="media/home/port.jpg"
+           data-src-lg="media/home/port-lg.mp4" data-src-sm="media/home/port-sm.mp4"></video>
+  </div>
+  <div class="layer" data-layer="handoff" data-seq="handoff" data-frames="72"><canvas class="seq"></canvas></div>
+  <div class="layer" data-layer="road">
+    <video muted loop playsinline preload="none" poster="media/home/road.jpg"
+           data-src-lg="media/home/road-lg.mp4" data-src-sm="media/home/road-sm.mp4"></video>
+  </div>
+  <div class="layer" data-layer="rise" data-seq="rise" data-frames="72"><canvas class="seq"></canvas></div>
+  <div class="layer" data-layer="map">
+    <canvas class="webgl"></canvas>
+    <div class="hub-label" data-hub="ctg"><div class="hl"><b>Chattogram</b><span>HQ &middot; Port operations</span></div></div>
+    <div class="hub-label" data-hub="dhk"><div class="hl"><b>Dhaka</b><span>Corporate supply &amp; distribution</span></div></div>
+    <div class="hub-label" data-hub="syl"><div class="hl"><b>Sylhet</b><span>Regional hub</span></div></div>
+    <div class="hub-label" data-hub="khl"><div class="hl"><b>Khulna</b><span>Regional hub</span></div></div>
+  </div>
+  <div class="stage-shade"></div>
+  <div class="stage-grain"></div>
+</div>
+
+<nav class="chapter-rail" aria-label="Story chapters">
+  <a href="#main"><i></i><span>Arrival</span></a>
+  <a href="#ch-sea"><i></i><span>Sea freight</span></a>
+  <a href="#ch-port"><i></i><span>Port &amp; C&amp;F</span></a>
+  <a href="#ch-handoff"><i></i><span>Quay to road</span></a>
+  <a href="#ch-road"><i></i><span>Inland</span></a>
+  <a href="#ch-network"><i></i><span>Network</span></a>
+</nav>
+
+<main class="cinema">
+
 <!-- =========== HERO =========== -->
-<section id="main" tabindex="-1" class="hero">
-  <div class="hero-img-layer" data-parallax="0.18" aria-hidden="true"></div>
-  <div class="container">
-    <div class="hero-inner">
-      <div>
-        <span class="eyebrow light reveal" data-i18n="hero.eyebrow">Streamlined Logistics, Accelerated Growth</span>
-        <h1 class="text-balance">
-          <span class="line"><span data-i18n="hero.h1.l1">Moving Bangladesh&rsquo;s</span></span>
-          <span class="line"><span data-i18n="hero.h1.l2">industry forward &mdash;</span></span>
-          <span class="line"><span><span class="accent" data-i18n="hero.h1.l3.a">on time,</span> <span data-i18n="hero.h1.l3.b">every time.</span></span></span>
-        </h1>
-        <p class="lead reveal delay-2" data-i18n="hero.lead">
-          Since 2008, Mozumder has delivered reliable transportation, freight forwarding, heavy equipment and corporate supply to the country&rsquo;s most demanding shippers. A diversified fleet, a disciplined team, a single commitment: your cargo, handled right.
-        </p>
-        <div class="hero-ctas reveal delay-3">
-          <a class="btn btn-primary" href="services.html">
-            <span data-i18n="hero.cta.primary">Explore Services</span>
-            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-          <a class="btn btn-ghost" href="contact.html" data-i18n="hero.cta.secondary">Talk to a Specialist</a>
-        </div>
-
-        <div class="hero-meta reveal delay-4">
-          <div class="stat">
-            <div class="num"><span data-count="17" data-suffix="">0</span><span class="plus">+</span></div>
-            <div class="label" data-i18n="stat.years">Years of Service</div>
-          </div>
-          <div class="stat">
-            <div class="num"><span data-count="100" data-suffix="">0</span><span class="plus">+</span></div>
-            <div class="label" data-i18n="stat.clients">Industrial Clients</div>
-          </div>
-          <div class="stat">
-            <div class="num"><span data-count="6" data-suffix="">0</span></div>
-            <div class="label" data-i18n="stat.concerns">Specialized Concerns</div>
-          </div>
-        </div>
-      </div>
-
-      <aside class="hero-visual reveal delay-2" aria-label="Animated port and highway operations scene">
-        <div class="shipping-scene" aria-hidden="true">
-          <div class="sky"></div>
-          <div class="stars"></div>
-          <div class="clouds"></div>
-          <div class="sun"></div>
-
-          <!-- Port cranes silhouette -->
-          <div class="cranes">
-            <svg viewBox="0 0 900 120" preserveAspectRatio="none">
-              <g fill="#0a1220">
-                <!-- crane 1 -->
-                <rect x="40" y="30" width="8" height="90"/>
-                <rect x="20" y="26" width="80" height="8"/>
-                <rect x="80" y="34" width="6" height="30"/>
-                <!-- crane 2 -->
-                <rect x="170" y="18" width="8" height="102"/>
-                <rect x="130" y="14" width="110" height="8"/>
-                <rect x="220" y="22" width="6" height="40"/>
-                <!-- crane 3 -->
-                <rect x="330" y="40" width="8" height="80"/>
-                <rect x="310" y="36" width="70" height="8"/>
-                <!-- crane 4 -->
-                <rect x="470" y="24" width="8" height="96"/>
-                <rect x="440" y="20" width="90" height="8"/>
-                <rect x="510" y="28" width="6" height="34"/>
-                <!-- crane 5 -->
-                <rect x="630" y="32" width="8" height="88"/>
-                <rect x="610" y="28" width="80" height="8"/>
-                <!-- crane 6 -->
-                <rect x="780" y="20" width="8" height="100"/>
-                <rect x="750" y="16" width="100" height="8"/>
-                <rect x="830" y="24" width="6" height="36"/>
-                <!-- dock line -->
-                <rect x="0" y="114" width="900" height="6"/>
-              </g>
-            </svg>
-          </div>
-
-          <!-- Ocean -->
-          <div class="ocean"></div>
-
-          <!-- Container ship (sails right) -->
-          <svg class="ship" viewBox="0 0 360 120" aria-hidden="true">
-            <!-- hull -->
-            <path d="M8 72 L352 72 L332 108 L28 108 Z" fill="#e11920"/>
-            <!-- deckhouse -->
-            <rect x="260" y="30" width="56" height="42" fill="#ffffff"/>
-            <rect x="272" y="40" width="6" height="8" fill="#0a2352"/>
-            <rect x="286" y="40" width="6" height="8" fill="#0a2352"/>
-            <rect x="300" y="40" width="6" height="8" fill="#0a2352"/>
-            <rect x="272" y="54" width="34" height="6" fill="#0a2352"/>
-            <!-- funnel -->
-            <rect x="288" y="14" width="14" height="20" fill="#0a2352"/>
-            <rect x="286" y="10" width="18" height="6" fill="#e11920"/>
-            <!-- container stack -->
-            <g>
-              <rect x="20"  y="46" width="36" height="26" fill="#0a2352"/>
-              <rect x="58"  y="46" width="36" height="26" fill="#f4a83c"/>
-              <rect x="96"  y="46" width="36" height="26" fill="#e11920"/>
-              <rect x="134" y="46" width="36" height="26" fill="#0a2352"/>
-              <rect x="172" y="46" width="36" height="26" fill="#f4a83c"/>
-              <rect x="210" y="46" width="36" height="26" fill="#e11920"/>
-              <!-- upper row -->
-              <rect x="40"  y="22" width="36" height="24" fill="#e11920"/>
-              <rect x="78"  y="22" width="36" height="24" fill="#0a2352"/>
-              <rect x="116" y="22" width="36" height="24" fill="#f4a83c"/>
-              <rect x="154" y="22" width="36" height="24" fill="#e11920"/>
-              <rect x="192" y="22" width="36" height="24" fill="#0a2352"/>
-            </g>
-            <!-- waterline foam -->
-            <path d="M10 106 Q80 100 160 108 T330 104 L332 112 L10 112 Z" fill="rgba(255,255,255,.2)"/>
-          </svg>
-
-          <!-- Road (highway) -->
-          <div class="road"></div>
-
-          <!-- Truck driving right -->
-          <svg class="truck" viewBox="0 0 360 110" aria-hidden="true">
-            <!-- trailer -->
-            <rect x="10" y="18" width="220" height="62" rx="4" fill="#0a2352"/>
-            <!-- Mozumder brand stripe on trailer -->
-            <rect x="30" y="30" width="180" height="16" fill="#ffffff"/>
-            <text x="120" y="44" text-anchor="middle" font-family="Manrope, Arial Black, sans-serif" font-weight="900" font-size="14" fill="#0a2352" letter-spacing="1.5">MOZUMDER</text>
-            <rect x="30" y="54" width="60" height="16" fill="#e11920"/>
-            <rect x="94" y="54" width="60" height="16" fill="#f4a83c"/>
-            <rect x="158" y="54" width="52" height="16" fill="#ffffff"/>
-            <!-- cab -->
-            <path d="M234 80 L234 38 L286 38 L302 58 L302 80 Z" fill="#e11920"/>
-            <!-- windshield -->
-            <path d="M248 54 L278 54 L292 66 L248 66 Z" fill="#9fdcff"/>
-            <!-- chassis -->
-            <rect x="10" y="78" width="292" height="6" fill="#111"/>
-            <!-- wheels (each wrapped in a group so the whole wheel rotates) -->
-            <g class="wheel" transform="translate(56 92)"><circle r="14" fill="#0a1220"/><circle r="6" fill="#555"/></g>
-            <g class="wheel" transform="translate(98 92)"><circle r="14" fill="#0a1220"/><circle r="6" fill="#555"/></g>
-            <g class="wheel" transform="translate(160 92)"><circle r="14" fill="#0a1220"/><circle r="6" fill="#555"/></g>
-            <g class="wheel" transform="translate(202 92)"><circle r="14" fill="#0a1220"/><circle r="6" fill="#555"/></g>
-            <g class="wheel" transform="translate(268 92)"><circle r="14" fill="#0a1220"/><circle r="6" fill="#555"/></g>
-          </svg>
-
-          <!-- Floating data chips -->
-          <div class="chip c1" aria-hidden="true">
-            <span class="d"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h12V8H3z"/><path d="M15 11h4l2 3v3h-6"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg></span>
-            <span><span class="k">Fleet · active</span><span class="v">200+ vehicles</span></span>
-          </div>
-          <div class="chip c2" aria-hidden="true">
-            <span class="d"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18 L22 18 L20 21 L4 21 Z"/><path d="M5 18 V10 h14 V18"/></svg></span>
-            <span><span class="k">On-time rate</span><span class="v">98.4%</span></span>
-          </div>
-
-          <!-- Live tag + caption overlay -->
-          <span class="tag"><span class="dot"></span> Live Operations · Chattogram Port</span>
-          <div class="caption">
-            <div class="t">Port-to-Plant, Nationwide</div>
-            <div class="s">Prime movers, 40ft containers, flatbeds &amp; tankers — moving at scale, 24/7.</div>
-          </div>
-        </div>
-      </aside>
+<section id="main" tabindex="-1" class="chapter ch-hero" data-chapter="hero">
+  <div class="container hero-copy">
+    <span class="eyebrow light" data-i18n="hero.eyebrow">Streamlined Logistics, Accelerated Growth</span>
+    <h1 class="text-balance">
+      <span class="line"><span data-i18n="hero.h1.l1">Moving Bangladesh&rsquo;s</span></span>
+      <span class="line"><span data-i18n="hero.h1.l2">industry forward &mdash;</span></span>
+      <span class="line"><span><span class="accent" data-i18n="hero.h1.l3.a">on time,</span> <span data-i18n="hero.h1.l3.b">every time.</span></span></span>
+    </h1>
+    <p class="lead" data-i18n="hero.lead">
+      Since 2008, Mozumder has delivered reliable transportation, freight forwarding, heavy equipment and corporate supply to the country&rsquo;s most demanding shippers. A diversified fleet, a disciplined team, a single commitment: your cargo, handled right.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="services.html">
+        <span data-i18n="hero.cta.primary">Explore Services</span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="contact.html" data-i18n="hero.cta.secondary">Talk to a Specialist</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="num"><span data-count="17">0</span><span class="plus">+</span></div><div class="label" data-i18n="stat.years">Years of Service</div></div>
+      <div class="stat"><div class="num"><span data-count="100">0</span><span class="plus">+</span></div><div class="label" data-i18n="stat.clients">Industrial Clients</div></div>
+      <div class="stat"><div class="num"><span data-count="6">0</span></div><div class="label" data-i18n="stat.concerns">Specialized Concerns</div></div>
     </div>
   </div>
+  <a class="scroll-cue" href="#ch-sea"><span>Scroll to follow the cargo</span><i aria-hidden="true"></i></a>
 </section>
+
+<!-- =========== 01 SEA FREIGHT =========== -->
+<section id="ch-sea" class="chapter" data-chapter="sea" style="--len: 340vh">
+  <div class="container">
+    <article class="panel">
+      <span class="ch-num">01 &mdash; Sea freight</span>
+      <h2>Booked, documented and on the water.</h2>
+      <p>Carrier booking, consolidation and shipping documentation arranged end to end &mdash; FCL and LCL, across sea, air and road.</p>
+    </article>
+    <article class="panel right">
+      <span class="ch-num">Shipping agent</span>
+      <h3>Your agent at Chattogram port.</h3>
+      <p>Port agency representation for vessel calls, berthing formalities and port authority liaison &mdash; through Mozumder Freight Associate, our highest-volume concern.</p>
+      <a class="panel-link" href="services.html">Freight services <span aria-hidden="true">&rarr;</span></a>
+    </article>
+  </div>
+</section>
+
+<!-- =========== 02 PORT & C&F =========== -->
+<section id="ch-port" class="chapter" data-chapter="port" style="--len: 260vh">
+  <div class="container">
+    <article class="panel">
+      <span class="ch-num">02 &mdash; Port &amp; customs</span>
+      <h2>Cleared at Chattogram.</h2>
+      <p>40+ years of C&amp;F experience &mdash; classification, duties and compliance handled end to end, so cargo leaves the port instead of waiting at it.</p>
+    </article>
+    <article class="panel right">
+      <span class="ch-num">Since 1984</span>
+      <h3>Nasha Enterprise Limited</h3>
+      <p>Our C&amp;F agent, with a 40+ year reputation for best-in-class customs clearing.</p>
+      <a class="panel-link" href="sister-concerns.html">Meet the group <span aria-hidden="true">&rarr;</span></a>
+    </article>
+  </div>
+</section>
+
+<!-- =========== 03 QUAY TO ROAD =========== -->
+<section id="ch-handoff" class="chapter" data-chapter="handoff" style="--len: 320vh">
+  <div class="container">
+    <article class="panel">
+      <span class="ch-num">03 &mdash; Quay to road</span>
+      <h2>From the crane straight onto the chassis.</h2>
+      <p>Containers leave the quay on Mozumder prime movers &mdash; 20ft and 40ft configurations, up to 5-axle trailers.</p>
+    </article>
+    <article class="panel right">
+      <span class="ch-num">Project cargo</span>
+      <h3>Heavy, oversized, remote.</h3>
+      <p>Low-bed and high-bed trailers and heavy cranes for the remote corners of the country &mdash; handled by Mozumder Logistics Limited.</p>
+      <a class="panel-link" href="fleet.html">See the fleet <span aria-hidden="true">&rarr;</span></a>
+    </article>
+  </div>
+</section>
+
+<!-- =========== 04 INLAND =========== -->
+<section id="ch-road" class="chapter" data-chapter="road" style="--len: 260vh">
+  <div class="container">
+    <article class="panel">
+      <span class="ch-num">04 &mdash; Inland transportation</span>
+      <h2>200+ vehicles. Moving around the clock.</h2>
+      <p>Nationwide road freight &mdash; containers, flatbeds, tippers and tankers. Operations run 24/7, weekends included.</p>
+    </article>
+    <article class="panel right panel-stats">
+      <div><b>20<em>ft</em></b><span>Container haul</span></div>
+      <div><b>40<em>ft</em></b><span>Trailer, 4 &amp; 5 axle</span></div>
+      <div><b>23<em>ft</em></b><span>Covered van</span></div>
+      <div><b>12</b><span>Wheeler / prime mover</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- =========== 05 NETWORK =========== -->
+<section id="ch-network" class="chapter" data-chapter="network" data-layers="rise,map" style="--len: 440vh">
+  <div class="container">
+    <article class="panel">
+      <span class="ch-num">05 &mdash; Nationwide network</span>
+      <h2>Four hubs. One network, end to end.</h2>
+      <p>From the Chattogram port through the Dhaka industrial corridor to Sylhet and Khulna &mdash; our dispatch network sits on the country&rsquo;s busiest lanes.</p>
+    </article>
+    <article class="panel right map-panel">
+      <ul class="hub-list">
+        <li><b>Chattogram</b> headquarters &amp; port operations</li>
+        <li><b>Dhaka</b> corporate supply &amp; distribution</li>
+        <li><b>Sylhet &amp; Khulna</b> regional hubs</li>
+        <li><b>64 districts</b> on-demand lanes</li>
+      </ul>
+      <a class="btn btn-primary" href="contact.html">Check your lane
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </article>
+  </div>
+</section>
+
+</main>
+
+<div class="after-cinema">
 
 <!-- =========== PARTNERS MARQUEE =========== -->
 <div class="marquee" aria-label="Trusted by leading brands">
@@ -416,195 +419,6 @@
   </div>
 </section>
 
-<!-- =========== MULTIMODAL JOURNEY =========== -->
-<section class="journey">
-  <div class="map-bg" aria-hidden="true"></div>
-  <div class="container wrap">
-    <div class="section-head reveal center">
-      <span class="eyebrow light">From origin to destination</span>
-      <h2 class="text-balance">One multimodal backbone. Every mode of transport, coordinated.</h2>
-      <p class="lead">From factory floor to overseas warehouse — we plan the land leg, clear the port, book the ship and stage the airlift through a single accountable desk.</p>
-    </div>
-
-    <div class="journey-track reveal">
-      <!-- Moving truck over the dashed road -->
-      <svg class="journey-mover" viewBox="0 0 120 70" aria-hidden="true">
-        <rect x="4" y="12" width="74" height="38" rx="3" fill="#0a2352"/>
-        <rect x="10" y="18" width="62" height="8" fill="#ffffff"/>
-        <rect x="10" y="30" width="30" height="8" fill="#e11920"/>
-        <rect x="42" y="30" width="30" height="8" fill="#f4a83c"/>
-        <path d="M80 50 L80 20 L98 20 L112 36 L112 50 Z" fill="#e11920"/>
-        <path d="M86 30 L102 30 L108 40 L86 40 Z" fill="#9fdcff"/>
-        <rect x="4" y="50" width="108" height="3" fill="#111"/>
-        <g class="wheel" transform="translate(24 58)"><circle r="8" fill="#0a1220"/><circle r="3" fill="#888"/></g>
-        <g class="wheel" transform="translate(62 58)"><circle r="8" fill="#0a1220"/><circle r="3" fill="#888"/></g>
-        <g class="wheel" transform="translate(100 58)"><circle r="8" fill="#0a1220"/><circle r="3" fill="#888"/></g>
-      </svg>
-
-      <div class="journey-stops">
-        <div class="journey-stop">
-          <div class="orb">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V10l7-5 7 5v11"/><rect x="10" y="14" width="4" height="7"/></svg>
-          </div>
-          <div class="t">Origin</div>
-          <div class="s">Factory · Plant · Warehouse</div>
-        </div>
-        <div class="journey-stop">
-          <div class="orb">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h12V8H3z"/><path d="M15 11h4l2 3v3h-6"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg>
-          </div>
-          <div class="t">Road Freight</div>
-          <div class="s">200+ vehicle fleet</div>
-        </div>
-        <div class="journey-stop">
-          <div class="orb">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18 L22 18 L20 21 L4 21 Z"/><path d="M5 18 V10 h14 V18"/><path d="M8 10 V6 h8 V10"/></svg>
-          </div>
-          <div class="t">Sea Freight</div>
-          <div class="s">FCL · LCL · Port handling</div>
-        </div>
-        <div class="journey-stop">
-          <div class="orb">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16 L22 10 L21 8 L10 10 L5 6 L3 7 L6 11 L3 14 Z"/></svg>
-          </div>
-          <div class="t">Air Freight</div>
-          <div class="s">Scheduled · Expedited</div>
-        </div>
-        <div class="journey-stop">
-          <div class="orb">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div class="t">Destination</div>
-          <div class="s">Last-mile delivery</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Animated container grid -->
-    <div class="container-stack reveal" aria-hidden="true">
-      <div class="cnt-box"></div>
-      <div class="cnt-box"></div>
-      <div class="cnt-box"></div>
-      <div class="cnt-box"></div>
-      <div class="cnt-box"></div>
-      <div class="cnt-box"></div>
-      <div class="cnt-box"></div>
-      <div class="cnt-box"></div>
-      <div class="cnt-box"></div>
-      <div class="cnt-box"></div>
-      <div class="cnt-box"></div>
-      <div class="cnt-box"></div>
-    </div>
-  </div>
-</section>
-
-<!-- =========== COVERAGE MAP =========== -->
-<section>
-  <div class="container">
-    <div class="split">
-      <div class="reveal">
-        <span class="eyebrow">Nationwide reach</span>
-        <h2 class="text-balance">Four hubs. One network that covers Bangladesh end-to-end.</h2>
-        <p>From the Chattogram port through the Dhaka industrial corridor to Sylhet and Khulna — our dispatch network sits on the country&rsquo;s busiest lanes, ready to pick up tonight.</p>
-        <ul class="check">
-          <li>Chattogram — headquarters &amp; port operations</li>
-          <li>Dhaka — corporate supply &amp; distribution</li>
-          <li>Sylhet &amp; Khulna — regional hubs</li>
-          <li>On-demand lanes across all 64 districts</li>
-        </ul>
-        <div style="margin-top: 28px;">
-          <a class="btn btn-dark" href="contact.html">
-            Check your lane
-            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-        </div>
-      </div>
-
-      <div class="coverage reveal delay-1" aria-label="Bangladesh coverage map with major operating hubs">
-        <svg class="bd-map" viewBox="0 0 500 400" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
-          <defs>
-            <linearGradient id="mapFill" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#eaf0fb"/>
-              <stop offset="100%" stop-color="#d7e1f3"/>
-            </linearGradient>
-            <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#f4a83c" stop-opacity=".45"/>
-              <stop offset="100%" stop-color="#f4a83c" stop-opacity="0"/>
-            </radialGradient>
-          </defs>
-          <!-- Bangladesh outline -->
-          <path d="M120 60 Q160 40 210 55 Q260 45 300 70 Q340 85 360 120 Q385 150 380 180 Q395 210 380 240 Q395 280 360 300 Q330 330 300 340 Q270 355 240 345 Q200 360 170 340 Q140 330 125 300 Q95 275 105 245 Q85 215 100 180 Q85 145 110 115 Q110 85 120 60 Z"
-            fill="url(#mapFill)" stroke="#0a2352" stroke-width="1.4" opacity=".95"/>
-          <!-- Rivers -->
-          <path d="M160 120 Q200 160 220 220 Q230 270 270 310" stroke="#9fbae6" stroke-width="2" fill="none" opacity=".7"/>
-          <path d="M250 90 Q270 160 290 230 Q310 290 330 320" stroke="#9fbae6" stroke-width="2" fill="none" opacity=".5"/>
-
-          <!-- District dots (all 64) — scattered across the country outline -->
-          <g class="district-dots" fill="#0a2352" opacity=".4">
-            <circle cx="145" cy="90" r="2"/><circle cx="175" cy="85" r="2"/><circle cx="205" cy="80" r="2"/>
-            <circle cx="235" cy="78" r="2"/><circle cx="265" cy="82" r="2"/><circle cx="295" cy="92" r="2"/>
-            <circle cx="130" cy="110" r="2"/><circle cx="165" cy="115" r="2"/><circle cx="195" cy="110" r="2"/>
-            <circle cx="260" cy="105" r="2"/><circle cx="290" cy="115" r="2"/><circle cx="320" cy="120" r="2"/>
-            <circle cx="115" cy="135" r="2"/><circle cx="145" cy="140" r="2"/><circle cx="175" cy="150" r="2"/>
-            <circle cx="275" cy="135" r="2"/><circle cx="310" cy="145" r="2"/><circle cx="345" cy="145" r="2"/>
-            <circle cx="110" cy="165" r="2"/><circle cx="140" cy="170" r="2"/><circle cx="170" cy="180" r="2"/>
-            <circle cx="200" cy="175" r="2"/><circle cx="255" cy="170" r="2"/><circle cx="285" cy="175" r="2"/>
-            <circle cx="315" cy="180" r="2"/><circle cx="350" cy="175" r="2"/>
-            <circle cx="100" cy="200" r="2"/><circle cx="130" cy="205" r="2"/><circle cx="165" cy="210" r="2"/>
-            <circle cx="195" cy="210" r="2"/><circle cx="255" cy="205" r="2"/><circle cx="290" cy="215" r="2"/>
-            <circle cx="325" cy="215" r="2"/><circle cx="360" cy="210" r="2"/>
-            <circle cx="110" cy="235" r="2"/><circle cx="145" cy="240" r="2"/><circle cx="180" cy="240" r="2"/>
-            <circle cx="215" cy="245" r="2"/><circle cx="270" cy="245" r="2"/><circle cx="300" cy="245" r="2"/>
-            <circle cx="335" cy="245" r="2"/><circle cx="365" cy="240" r="2"/>
-            <circle cx="120" cy="270" r="2"/><circle cx="155" cy="270" r="2"/><circle cx="190" cy="275" r="2"/>
-            <circle cx="225" cy="275" r="2"/><circle cx="255" cy="280" r="2"/><circle cx="290" cy="280" r="2"/>
-            <circle cx="340" cy="275" r="2"/><circle cx="365" cy="270" r="2"/>
-            <circle cx="130" cy="300" r="2"/><circle cx="165" cy="305" r="2"/><circle cx="200" cy="310" r="2"/>
-            <circle cx="235" cy="310" r="2"/><circle cx="280" cy="315" r="2"/><circle cx="315" cy="315" r="2"/>
-            <circle cx="340" cy="310" r="2"/>
-            <circle cx="155" cy="330" r="2"/><circle cx="190" cy="335" r="2"/><circle cx="240" cy="340" r="2"/>
-            <circle cx="280" cy="340" r="2"/><circle cx="315" cy="335" r="2"/>
-          </g>
-
-          <!-- Active lanes connecting hubs (animated) -->
-          <g class="lanes" fill="none" stroke="#f4a83c" stroke-width="1.4" stroke-linecap="round" opacity=".75">
-            <path d="M220 175 Q265 210 325 270" stroke-dasharray="5 4">
-              <animate attributeName="stroke-dashoffset" from="0" to="-90" dur="2.4s" repeatCount="indefinite"/>
-            </path>
-            <path d="M220 175 Q200 140 270 110" stroke-dasharray="5 4">
-              <animate attributeName="stroke-dashoffset" from="0" to="-90" dur="3.2s" repeatCount="indefinite"/>
-            </path>
-            <path d="M220 175 Q170 210 150 265" stroke-dasharray="5 4">
-              <animate attributeName="stroke-dashoffset" from="0" to="-90" dur="2.8s" repeatCount="indefinite"/>
-            </path>
-          </g>
-
-          <!-- Hub glows -->
-          <circle cx="220" cy="175" r="40" fill="url(#hubGlow)"/>
-          <circle cx="325" cy="270" r="36" fill="url(#hubGlow)"/>
-        </svg>
-        <!-- Dhaka (capital) -->
-        <div class="pin lg" style="left: 44%; top: 44%;" aria-hidden="true"></div>
-        <div class="pin-label" style="left: 44%; top: 50%;">Dhaka</div>
-        <!-- Chattogram -->
-        <div class="pin lg" style="left: 65%; top: 68%;" aria-hidden="true"></div>
-        <div class="pin-label" style="left: 65%; top: 74%;">Chattogram · HQ</div>
-        <!-- Sylhet -->
-        <div class="pin" style="left: 72%; top: 30%;" aria-hidden="true"></div>
-        <div class="pin-label" style="left: 72%; top: 36%;">Sylhet</div>
-        <!-- Khulna -->
-        <div class="pin" style="left: 30%; top: 66%;" aria-hidden="true"></div>
-        <div class="pin-label" style="left: 30%; top: 72%;">Khulna</div>
-
-        <div class="coverage-legend" aria-hidden="true">
-          <span><i class="dot hub"></i> Operating hubs</span>
-          <span><i class="dot small"></i> District coverage</span>
-          <span><i class="line"></i> Active lanes</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- =========== STATS BAND =========== -->
 <section class="stats-band">
@@ -725,7 +539,9 @@
 <!-- =========== CTA BAND =========== -->
 <section class="section-sm">
   <div class="container">
-    <div class="cta-band reveal">
+    <div class="cta-band cta-video reveal">
+      <video class="cta-bg" muted loop playsinline preload="none" poster="media/home/hub.jpg" aria-hidden="true"
+             data-src-lg="media/home/hub-lg.mp4" data-src-sm="media/home/hub-sm.mp4"></video>
       <div>
         <h2>Have cargo to move? Let&rsquo;s talk logistics.</h2>
         <p>Tell us what you need to move, when and where — we&rsquo;ll build the route, the crew and the equipment to deliver it.</p>
@@ -799,12 +615,13 @@
     </div>
   </div>
 </footer>
+</div><!-- /.after-cinema -->
 
 <script src="js/main.js"></script>
 <script src="js/enhance.js"></script>
 <script src="js/enhance-v2.js"></script>
-<script src="js/motion.js"></script>
 <script src="js/alerts.js"></script>
+<script src="js/home/home.js"></script>
 
 <!-- Floating Contact FAB -->
 <div class="fab-stack" aria-label="Quick contact">
