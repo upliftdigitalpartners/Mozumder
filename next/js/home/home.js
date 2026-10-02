@@ -16,7 +16,9 @@
   doc.classList.add('cinema-on');
 
   const mq = (q) => window.matchMedia && window.matchMedia(q).matches;
-  const small = mq('(max-width: 760px)');
+  // Phones/tablets held upright get native-resolution portrait cuts of the
+  // footage; everything else gets the 1280px landscape versions.
+  const portrait = mq('(orientation: portrait) and (max-width: 1024px)');
   const still = mq('(prefers-reduced-motion: reduce)');
   const header = document.querySelector('.site-header');
   const rail = [...document.querySelectorAll('.chapter-rail a')];
@@ -31,7 +33,7 @@
       this.canvas = canvas;
       this.ctx = canvas.getContext('2d');
       this.count = count;
-      this.base = `media/home/seq/${name}/${small ? 'sm' : 'lg'}/`;
+      this.base = `media/home/seq/${name}/${portrait ? 'pt' : 'lg'}/`;
       this.frames = new Array(count);
       this.started = false;
       this.drawn = -1;
@@ -105,10 +107,11 @@
     const canvas = el.querySelector('canvas.seq');
     if (video) {
       L.video = video;
+      if (portrait && video.poster) video.poster = video.getAttribute('poster').replace(/\.jpg$/, '-pt.jpg');
       L.attach = () => {
         if (L.attached) return;
         L.attached = true;
-        const src = video.dataset[small ? 'srcSm' : 'srcLg'];
+        const src = video.dataset[portrait ? 'srcPt' : 'srcLg'];
         if (src) { video.src = src; video.load(); }
         video.addEventListener('canplay', () => {
           if (L.opacity > 0 && !still) { const pr = video.play(); if (pr && pr.catch) pr.catch(() => {}); }
@@ -234,7 +237,7 @@
   document.querySelectorAll('video.cta-bg').forEach((v) => {
     if (!('IntersectionObserver' in window)) return;
     const io = new IntersectionObserver((es) => es.forEach((e) => {
-      if (e.isIntersecting && !v.src) { v.src = v.dataset[small ? 'srcSm' : 'srcLg']; v.load(); }
+      if (e.isIntersecting && !v.src) { v.src = v.dataset.srcLg; v.load(); }
       if (still) return;
       if (e.isIntersecting) { const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); } else v.pause();
     }), { rootMargin: '200px 0px' });

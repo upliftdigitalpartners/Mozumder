@@ -29,10 +29,12 @@ attaches them to the cards; the animated line drawings stay as the fallback.
 `media/home/` holds the homepage footage, made from the `reference` renders on
 `media-raw`:
 
-- `hero`, `port`, `road`, `hub` — seamless-loop MP4s in two sizes (`-lg`
-  1280px for desktop, `-sm` 720px for phones) plus a JPG poster each.
-- `seq/sea`, `seq/handoff`, `seq/rise` — 72-frame WebP sequences (`lg`/`sm`)
-  that scrub with the scroll position.
+- `hero`, `port`, `road`, `hub` — seamless-loop MP4s: `-lg` (1280px
+  landscape) and, except `hub`, `-pt` (608×1080 portrait cut at the source's
+  full resolution, centred on the subject) for phones held upright, plus a
+  JPG poster each.
+- `seq/sea`, `seq/handoff`, `seq/rise` — 72-frame WebP sequences (`lg`
+  landscape / `pt` portrait) that scrub with the scroll position.
 
 ## Homepage
 

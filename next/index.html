@@ -75,7 +75,8 @@
     })(document.documentElement);
   </script>
   <link rel="stylesheet" href="css/home.css" />
-  <link rel="preload" as="image" href="media/home/hero.jpg" />
+  <link rel="preload" as="image" href="media/home/hero.jpg" media="not all and (orientation: portrait) and (max-width: 1024px)" />
+  <link rel="preload" as="image" href="media/home/hero-pt.jpg" media="(orientation: portrait) and (max-width: 1024px)" />
   <script type="importmap">{"imports":{"three":"./vendor/three/three.module.min.js","three/addons/":"./vendor/three/addons/"}}</script>
 </head>
 <body>
@@ -118,17 +119,17 @@
 <div class="stage" aria-hidden="true">
   <div class="layer" data-layer="hero">
     <video muted loop playsinline preload="none" poster="media/home/hero.jpg"
-           data-src-lg="media/home/hero-lg.mp4" data-src-sm="media/home/hero-sm.mp4"></video>
+           data-src-lg="media/home/hero-lg.mp4" data-src-pt="media/home/hero-pt.mp4"></video>
   </div>
   <div class="layer" data-layer="sea" data-seq="sea" data-frames="72"><canvas class="seq"></canvas></div>
   <div class="layer" data-layer="port">
     <video muted loop playsinline preload="none" poster="media/home/port.jpg"
-           data-src-lg="media/home/port-lg.mp4" data-src-sm="media/home/port-sm.mp4"></video>
+           data-src-lg="media/home/port-lg.mp4" data-src-pt="media/home/port-pt.mp4"></video>
   </div>
   <div class="layer" data-layer="handoff" data-seq="handoff" data-frames="72"><canvas class="seq"></canvas></div>
   <div class="layer" data-layer="road">
     <video muted loop playsinline preload="none" poster="media/home/road.jpg"
-           data-src-lg="media/home/road-lg.mp4" data-src-sm="media/home/road-sm.mp4"></video>
+           data-src-lg="media/home/road-lg.mp4" data-src-pt="media/home/road-pt.mp4"></video>
   </div>
   <div class="layer" data-layer="rise" data-seq="rise" data-frames="72"><canvas class="seq"></canvas></div>
   <div class="layer" data-layer="map">
@@ -541,7 +542,7 @@
   <div class="container">
     <div class="cta-band cta-video reveal">
       <video class="cta-bg" muted loop playsinline preload="none" poster="media/home/hub.jpg" aria-hidden="true"
-             data-src-lg="media/home/hub-lg.mp4" data-src-sm="media/home/hub-sm.mp4"></video>
+             data-src-lg="media/home/hub-lg.mp4"></video>
       <div>
         <h2>Have cargo to move? Let&rsquo;s talk logistics.</h2>
         <p>Tell us what you need to move, when and where — we&rsquo;ll build the route, the crew and the equipment to deliver it.</p>
