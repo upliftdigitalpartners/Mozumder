@@ -22,6 +22,7 @@ A modern, handcrafted static website for **Mozumder** — a diversified logistic
 ├── partners.html           # Corporate partners
 ├── contact.html            # Offices + enquiry form
 ├── 404.html
+├── next/                  # UI test environment (copy of the site, noindex) — see next/README.md
 ├── css/main.css            # Design system + all components
 ├── js/main.js              # Nav, reveal animations, count-up, form
 ├── assets/                 # logo, favicon, icons, partners

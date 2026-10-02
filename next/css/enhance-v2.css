@@ -1,0 +1,710 @@
+/* =========================================================
+   Mozumder — Enhancements v2
+   New: floating contact FAB, quote form, coverage map,
+        Bangla toggle styles, inner-page hero polish.
+   ========================================================= */
+
+/* ---------- Floating Contact FAB (WhatsApp + phone) ---------- */
+.fab-stack {
+  position: fixed;
+  right: 18px; bottom: 18px;
+  z-index: 95;
+  display: flex; flex-direction: column; gap: 12px;
+  align-items: flex-end;
+  font-family: var(--font-display);
+}
+.fab-stack .fab {
+  position: relative;
+  width: 56px; height: 56px;
+  border-radius: 999px;
+  display: grid; place-items: center;
+  color: #fff;
+  box-shadow: 0 18px 40px -14px rgba(0,0,0,.45), 0 4px 10px rgba(0,0,0,.18);
+  transition: transform .3s var(--ease-out-quart), box-shadow .3s;
+  cursor: pointer;
+  text-decoration: none;
+}
+.fab-stack .fab:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 26px 50px -14px rgba(0,0,0,.55); }
+.fab-stack .fab svg { width: 26px; height: 26px; }
+.fab-stack .fab.wa { background: #25d366; }
+.fab-stack .fab.wa::before {
+  content: ""; position: absolute; inset: -4px;
+  border-radius: 999px;
+  border: 2px solid rgba(37,211,102,.45);
+  animation: fab-pulse 2.4s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes fab-pulse {
+  0%   { transform: scale(.95); opacity: .9; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+.fab-stack .fab.tel { background: var(--ink-deep, #0a1f4d); }
+.fab-stack .fab-label {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%; transform: translateY(-50%) translateX(6px);
+  background: #ffffff;
+  color: var(--ink-deep, #0a1f4d);
+  padding: 7px 12px;
+  border-radius: 10px;
+  font-size: .78rem;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 14px 26px -12px rgba(10,31,77,.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s, transform .25s var(--ease-out-quart);
+}
+.fab-stack .fab-label::after {
+  content: ""; position: absolute; right: -5px; top: 50%; transform: translateY(-50%) rotate(45deg);
+  width: 10px; height: 10px; background: #fff;
+  box-shadow: 2px -2px 0 rgba(10,31,77,.02);
+}
+.fab-stack .fab:hover .fab-label,
+.fab-stack .fab:focus-visible .fab-label { opacity: 1; transform: translateY(-50%) translateX(0); }
+
+@media (max-width: 640px) {
+  .fab-stack { right: 14px; bottom: 14px; gap: 10px; }
+  .fab-stack .fab { width: 50px; height: 50px; }
+  .fab-stack .fab svg { width: 22px; height: 22px; }
+  .fab-stack .fab-label { display: none; }
+}
+
+/* ---------- Bangla toggle (in nav) ---------- */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 999px;
+  padding: 3px;
+  margin-right: 10px;
+  font-family: var(--font-display);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+.site-header.is-solid .lang-switch {
+  background: rgba(10,31,77,.06);
+  border-color: rgba(10,31,77,.12);
+}
+.lang-switch button {
+  padding: 5px 11px;
+  border-radius: 999px;
+  color: inherit;
+  opacity: .6;
+  transition: background .25s, color .25s, opacity .25s;
+}
+.lang-switch button.on {
+  background: var(--gold, #f4a83c);
+  color: var(--ink-deep, #0a1f4d);
+  opacity: 1;
+}
+body.lang-bn {
+  --font-body-override: "Noto Sans Bengali", "Hind Siliguri", var(--font-body, system-ui);
+}
+body.lang-bn [data-i18n] { font-family: var(--font-body-override); }
+body.lang-bn h1[data-i18n],
+body.lang-bn h2[data-i18n],
+body.lang-bn h3[data-i18n],
+body.lang-bn .hero h1,
+body.lang-bn .lead {
+  letter-spacing: 0;
+}
+
+@media (max-width: 720px) {
+  .lang-switch { margin-right: 6px; font-size: .68rem; }
+  .lang-switch button { padding: 4px 8px; }
+}
+
+/* ---------- Quote Form ---------- */
+.quote-wrap {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 48px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .quote-wrap { grid-template-columns: 1fr; gap: 28px; }
+}
+
+.quote-form {
+  background: #fff;
+  border: 1px solid rgba(10,31,77,.08);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 30px 60px -30px rgba(10,31,77,.18);
+}
+.quote-form h3 { margin: 0 0 4px; font-size: 1.5rem; letter-spacing: -0.02em; }
+.quote-form .muted { color: rgba(10,31,77,.6); font-size: .92rem; margin-bottom: 20px; }
+
+.quote-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.quote-grid .full { grid-column: 1 / -1; }
+@media (max-width: 560px) { .quote-grid { grid-template-columns: 1fr; } }
+
+.field {
+  display: flex; flex-direction: column; gap: 6px;
+  font-family: var(--font-display);
+}
+.field label {
+  font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(10,31,77,.7); font-weight: 700;
+}
+.field input,
+.field select,
+.field textarea {
+  font: inherit;
+  font-family: var(--font-body, system-ui);
+  font-size: .95rem;
+  padding: 12px 14px;
+  border: 1px solid rgba(10,31,77,.15);
+  border-radius: 10px;
+  background: #fafaf7;
+  color: var(--ink-deep, #0a1f4d);
+  transition: border-color .25s, background .25s, box-shadow .25s;
+}
+.field textarea { min-height: 100px; resize: vertical; }
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--gold, #f4a83c);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(244,168,60,.15);
+}
+.field .hint { font-size: .78rem; color: rgba(10,31,77,.5); }
+
+.quote-submit {
+  margin-top: 18px;
+  display: flex; align-items: center; gap: 14px;
+  flex-wrap: wrap;
+}
+.quote-submit .note { font-size: .82rem; color: rgba(10,31,77,.55); }
+
+.quote-side {
+  padding: 28px;
+  background: linear-gradient(160deg, #0a1f4d 0%, #13306b 60%, #0a1f4d 100%);
+  color: #fff;
+  border-radius: 20px;
+  position: relative; overflow: hidden;
+}
+.quote-side::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(500px 300px at 110% -10%, rgba(244,168,60,.25), transparent 60%),
+    radial-gradient(400px 300px at -10% 110%, rgba(91,140,255,.18), transparent 60%);
+  pointer-events: none;
+}
+.quote-side > * { position: relative; }
+.quote-side h4 { margin: 0 0 10px; font-size: 1.25rem; letter-spacing: -0.015em; }
+.quote-side p { color: rgba(255,255,255,.78); font-size: .95rem; margin-bottom: 22px; }
+.quote-side ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
+.quote-side li { display: flex; gap: 12px; align-items: flex-start; font-size: .92rem; color: rgba(255,255,255,.88); }
+.quote-side li svg { flex: none; width: 22px; height: 22px; color: var(--gold-bright, #f8bf67); margin-top: 1px; }
+.quote-side li b { display: block; color: #fff; margin-bottom: 1px; }
+.quote-side a.tel-line {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 22px; padding: 12px 16px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 12px;
+  color: #fff; font-weight: 700; letter-spacing: -0.01em;
+  transition: background .25s, border-color .25s;
+}
+.quote-side a.tel-line:hover { background: rgba(255,255,255,.15); border-color: rgba(255,255,255,.3); }
+
+.quote-success, .quote-error {
+  display: none;
+  padding: 14px 16px;
+  border-radius: 10px;
+  margin-top: 16px;
+  font-size: .92rem;
+  font-weight: 600;
+}
+.quote-success.on, .quote-error.on { display: block; }
+.quote-success { background: #e9f8ed; color: #106b2a; border: 1px solid #b6e4c3; }
+.quote-error { background: #fdecec; color: #a21e1e; border: 1px solid #f3c2c2; }
+
+/* ---------- Inner page hero (unified) ---------- */
+.inner-hero {
+  position: relative;
+  padding: 140px 0 80px;
+  color: #fff;
+  background: linear-gradient(135deg, #050e26 0%, #0a1f4d 50%, #13306b 100%);
+  overflow: hidden;
+}
+.inner-hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(1000px 500px at 80% -10%, rgba(244,168,60,.22), transparent 60%),
+    radial-gradient(800px 500px at -10% 110%, rgba(91,140,255,.18), transparent 60%);
+  pointer-events: none;
+}
+.inner-hero::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 48px 48px, 48px 48px;
+  opacity: .5;
+  pointer-events: none;
+}
+.inner-hero .container { position: relative; }
+.inner-hero .eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--gold-bright, #f8bf67);
+  font-weight: 700;
+  padding: 6px 14px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 999px;
+}
+.inner-hero .eyebrow::before {
+  content: ""; width: 6px; height: 6px; border-radius: 999px; background: var(--gold-bright, #f8bf67);
+  box-shadow: 0 0 0 0 rgba(244,168,60,.45);
+  animation: eb-pulse 1.8s ease-in-out infinite;
+}
+.inner-hero h1 {
+  margin: 18px 0 14px;
+  font-size: clamp(2rem, 4.5vw, 3.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  max-width: 900px;
+  text-wrap: balance;
+}
+.inner-hero p.lead {
+  color: rgba(255,255,255,.78);
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  max-width: 640px;
+  line-height: 1.6;
+}
+.inner-hero .crumbs {
+  display: inline-flex; gap: 8px; font-size: .82rem; color: rgba(255,255,255,.55);
+  margin-bottom: 8px;
+  font-family: var(--font-display);
+}
+.inner-hero .crumbs a { color: rgba(255,255,255,.78); }
+.inner-hero .crumbs span { color: rgba(255,255,255,.35); }
+
+/* ---------- Contact grid (3 office cards) ---------- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 20px;
+}
+@media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+.office-card {
+  background: #fff;
+  border: 1px solid rgba(10,31,77,.08);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 20px 40px -28px rgba(10,31,77,.15);
+}
+.office-card h4 { font-size: 1.15rem; letter-spacing: -0.015em; }
+.office-card p { color: rgba(10,31,77,.6); font-size: .92rem; }
+.office-card address { font-style: normal; font-size: .88rem; line-height: 1.65; color: rgba(10,31,77,.75); }
+.office-card address a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+/* ---------- Coverage Map ---------- */
+.coverage-legend {
+  position: absolute;
+  left: 50%; bottom: -14px;
+  transform: translate(-50%, 100%);
+  display: inline-flex; flex-wrap: wrap; gap: 18px;
+  padding: 10px 16px;
+  background: #fff;
+  border: 1px solid rgba(10,31,77,.08);
+  border-radius: 999px;
+  box-shadow: 0 20px 40px -24px rgba(10,31,77,.2);
+  font-family: var(--font-display);
+  font-size: .76rem;
+  font-weight: 600;
+  color: rgba(10,31,77,.7);
+  letter-spacing: .01em;
+  white-space: nowrap;
+  z-index: 2;
+}
+.coverage-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.coverage-legend .dot { width: 8px; height: 8px; border-radius: 999px; display: inline-block; background: var(--gold, #f4a83c); }
+.coverage-legend .dot.small { width: 5px; height: 5px; background: #0a1f4d; opacity: .5; }
+.coverage-legend .line { width: 14px; height: 2px; background: repeating-linear-gradient(90deg, var(--gold, #f4a83c) 0 3px, transparent 3px 5px); display: inline-block; }
+@media (max-width: 560px) { .coverage-legend { font-size: .7rem; gap: 10px; padding: 8px 12px; } }
+
+/* ---------- Coverage map 2 (map wrap style — unused fallback) ---------- */
+.coverage-map-wrap {
+  position: relative;
+  aspect-ratio: 9 / 10;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.coverage-map-wrap svg {
+  width: 100%; height: 100%;
+  display: block;
+}
+.coverage-map-wrap .bd-outline {
+  fill: #e8efff;
+  stroke: #c5d2ec;
+  stroke-width: 1.5;
+  filter: drop-shadow(0 14px 30px rgba(10,31,77,.15));
+}
+.coverage-map-wrap .bd-inner {
+  fill: #f7f9ff;
+  stroke: rgba(10,31,77,.08);
+  stroke-width: .5;
+}
+.coverage-map-wrap .hub {
+  fill: var(--gold, #f4a83c);
+  cursor: pointer;
+}
+.coverage-map-wrap .hub-ring {
+  fill: none;
+  stroke: var(--gold, #f4a83c);
+  stroke-width: 1;
+  opacity: .5;
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: hub-pulse 2.4s ease-out infinite;
+}
+@keyframes hub-pulse {
+  0%   { transform: scale(.6); opacity: .8; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.coverage-map-wrap .hub-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  fill: #0a1f4d;
+  letter-spacing: .01em;
+}
+.coverage-map-wrap .route {
+  fill: none;
+  stroke: rgba(244,168,60,.65);
+  stroke-width: 1.4;
+  stroke-dasharray: 4 4;
+  animation: route-dash 18s linear infinite;
+}
+@keyframes route-dash { to { stroke-dashoffset: -200; } }
+.coverage-map-wrap .dot {
+  fill: #0a1f4d;
+}
+
+.coverage-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+@media (max-width: 900px) { .coverage-grid { grid-template-columns: 1fr; } }
+.coverage-grid .copy h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); letter-spacing: -0.02em; margin-bottom: 14px; }
+.coverage-grid .copy p { color: rgba(10,31,77,.7); margin-bottom: 22px; }
+.coverage-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+  margin-top: 22px;
+}
+.coverage-stats .cs { border-left: 2px solid var(--gold, #f4a83c); padding: 2px 0 2px 12px; }
+.coverage-stats .cs .n { font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; color: var(--ink-deep, #0a1f4d); line-height: 1; }
+.coverage-stats .cs .l { font-size: .78rem; text-transform: uppercase; letter-spacing: .14em; color: rgba(10,31,77,.6); margin-top: 6px; font-weight: 600; }
+
+/* ---------- SEO OG image placeholder helper (visual only) ---------- */
+/* (actual OG is an image file; no styling here) */
+
+/* ---------- Print tuning ---------- */
+@media print {
+  .fab-stack, .lang-switch, .nav-cta, .nav-toggle { display: none !important; }
+}
+
+/* ---------- Legibility over the dark hero ---------- */
+/* main.css declares a dark colour directly on .brand, .nav-menu a and the
+   h1..h5 group. A direct declaration beats the light colour these would
+   otherwise inherit from .inner-hero (and the dark home hero), so at
+   scroll-top they rendered near-black on near-black — measured between
+   1.03:1 and 1.12:1 against the 4.5:1 minimum. */
+
+/* The brand sits in the header bar at every width, so it needs lightening
+   at every width while the header is transparent. */
+.site-header:not(.is-solid) .brand { color: #fff; }
+
+/* The nav links only sit on the hero above the mobile breakpoint. Below it
+   .nav-menu becomes a fixed white panel, where the dark colours are right. */
+@media (min-width: 721px) {
+  .site-header:not(.is-solid) .nav-menu a { color: rgba(255,255,255,.92); }
+  .site-header:not(.is-solid) .nav-menu a:hover,
+  .site-header:not(.is-solid) .nav-menu a.active { color: var(--gold-bright, #ffb547); }
+}
+
+/* Inner-page headline: inherits #fff from .inner-hero, but the element-level
+   h1 rule overrides inheritance regardless of specificity. */
+.inner-hero h1 { color: #fff; }
+
+/* Now folded into --gold-text in main.css, which every eyebrow and light-surface
+   link uses. Kept as an explicit override so the solid header wins over the
+   transparent-header rule above it. */
+.site-header.is-solid .nav-menu a:hover,
+.site-header.is-solid .nav-menu a.active { color: var(--gold-text); }
+
+/* .crumbs is inline-flex, so the eyebrow pill lands flush beside it rather
+   than under it — which is what its own margin-bottom was written for.
+   Make it a block-level flex row so the pill drops to the next line. */
+.inner-hero .crumbs { display: flex; width: fit-content; }
+
+/* =========================================================
+   Motion layer (js/motion.js)
+   Only engages when that script is alive; every rule below is
+   additive so the page is unchanged if it never runs.
+   ========================================================= */
+
+/* Cards lean a touch toward the pointer and pick up a soft highlight where
+   it sits. --px/--py are written by motion.js, 0..1 across the card. */
+.motion-ready .service-card,
+.motion-ready .concern-card,
+.motion-ready .fleet-card,
+.motion-ready .stat-card {
+  --px: .5; --py: .5;
+  transition: transform .5s var(--ease), box-shadow .5s var(--ease), border-color .35s var(--ease);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .motion-ready .service-card:hover,
+  .motion-ready .concern-card:hover,
+  .motion-ready .fleet-card:hover {
+    transform:
+      translateY(-6px)
+      rotateX(calc((var(--py) - .5) * -3deg))
+      rotateY(calc((var(--px) - .5) * 4deg));
+  }
+  .motion-ready .services-grid,
+  .motion-ready .concerns-grid,
+  .motion-ready .fleet-grid { perspective: 1200px; }
+
+  /* Light follows the cursor across the card face. */
+  .motion-ready .service-card::before,
+  .motion-ready .concern-card::before {
+    content: ""; position: absolute; inset: 0; z-index: 0;
+    border-radius: inherit; pointer-events: none;
+    opacity: 0; transition: opacity .4s var(--ease);
+    background: radial-gradient(
+      420px circle at calc(var(--px) * 100%) calc(var(--py) * 100%),
+      rgba(244,168,60,.16), transparent 62%);
+  }
+  .motion-ready .service-card:hover::before,
+  .motion-ready .concern-card:hover::before { opacity: 1; }
+  .motion-ready .service-card.featured:hover::before {
+    background: radial-gradient(
+      420px circle at calc(var(--px) * 100%) calc(var(--py) * 100%),
+      rgba(255,181,71,.20), transparent 62%);
+  }
+}
+
+/* Reveals get a longer, softer curve while inertial scrolling is on, so the
+   two motions read as one system rather than two competing speeds. */
+.has-smooth-scroll .reveal {
+  transition-duration: .95s, .95s, .7s;
+  transition-timing-function: cubic-bezier(.16, 1, .3, 1);
+}
+
+/* Nav and any overflow panel must keep native scrolling. */
+.nav-menu, .quote-form, .article-scroll { }
+.nav-menu.open { overscroll-behavior: contain; }
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-ready .service-card:hover,
+  .motion-ready .concern-card:hover,
+  .motion-ready .fleet-card:hover { transform: none; }
+  .motion-ready .service-card::before,
+  .motion-ready .concern-card::before { display: none; }
+}
+
+/* Our rAF loop owns the scroll position while it is active; leaving the CSS
+   smooth behaviour on would have the browser animating the same property at
+   the same time and the two cancel each other out. */
+.has-smooth-scroll { scroll-behavior: auto; }
+
+/* ---------- Origin / destination autocomplete (js/places.js) ---------- */
+.ac-wrap { position: relative; }
+.ac-list {
+  position: absolute; z-index: 30; left: 0; right: 0; top: calc(100% + 6px);
+  background: var(--white);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  max-height: 292px; overflow-y: auto;
+  overscroll-behavior: contain;
+  /* The field sits in a two-column grid and is narrow; let the list run wider
+     than its input so place names do not wrap onto three lines. */
+  min-width: max(100%, 310px);
+}
+.ac-opt {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 14px;
+  padding: 10px 14px; cursor: pointer;
+  border-bottom: 1px solid var(--hairline);
+}
+.ac-opt:last-child { border-bottom: 0; }
+.ac-opt.is-active, .ac-opt:hover { background: var(--surface); }
+.ac-name {
+  font-weight: 600; color: var(--ink-deep); font-size: .95rem;
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.ac-meta {
+  font-size: .72rem; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--text-soft); white-space: nowrap; flex: none;
+}
+.ac-opt.is-active .ac-name { color: var(--ink); }
+@media (max-width: 720px) { .ac-list { max-height: 232px; min-width: 100%; } }
+
+/* ---------- Operational notices (js/alerts.js) ----------
+   A contained card that floats below the header rather than a full-bleed
+   band. Full-bleed coloured bars read as browser chrome; this reads as the
+   site. Level is carried by a small chip and a hairline edge, so the panel
+   itself stays the brand navy instead of turning brown or red. */
+.alert-bar {
+  position: fixed; top: calc(var(--nav-h) + 10px); left: 0; right: 0; z-index: 45;
+  padding-inline: var(--gutter);
+  transform: translateY(-14px); opacity: 0; pointer-events: none;
+  transition: transform .5s var(--ease), opacity .38s var(--ease);
+}
+.alert-bar.is-open { transform: none; opacity: 1; pointer-events: auto; }
+
+.alert-inner {
+  width: 100%; max-width: var(--container); margin-inline: auto;
+  display: flex; align-items: center; gap: 14px;
+  padding: 11px 12px 11px 16px;
+  border-radius: 14px;
+  background: rgba(10, 35, 82, .93);
+  -webkit-backdrop-filter: saturate(150%) blur(10px);
+  backdrop-filter: saturate(150%) blur(10px);
+  border: 1px solid rgba(255,255,255,.13);
+  box-shadow: 0 18px 40px -22px rgba(6,18,44,.85), 0 2px 6px rgba(6,18,44,.28);
+  position: relative; overflow: hidden;
+}
+/* Level shows as a bright edge on the leading side, not as a wash of colour. */
+.alert-inner::before {
+  content: ""; position: absolute; inset: 0 auto 0 0; width: 3px;
+  background: var(--alert-accent, var(--gold));
+}
+
+.alert-chip {
+  flex: none;
+  font-family: var(--font-display); font-size: .64rem; font-weight: 800;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--alert-accent, var(--gold));
+  border: 1px solid color-mix(in srgb, var(--alert-accent, var(--gold)) 40%, transparent);
+  background: color-mix(in srgb, var(--alert-accent, var(--gold)) 12%, transparent);
+  padding: 4px 9px; border-radius: 999px;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.alert-chip::before {
+  content: ""; width: 5px; height: 5px; border-radius: 999px; flex: none;
+  background: currentColor;
+  animation: alert-pulse 2.6s var(--ease) infinite;
+}
+
+.alert-slot { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0;
+  transition: opacity .22s var(--ease); }
+.alert-slot.is-swapping { opacity: 0; }
+.alert-text {
+  color: rgba(255,255,255,.92); font-size: .9rem; line-height: 1.45;
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+a.alert-text { text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.28);
+  padding-bottom: 1px; transition: border-color .2s var(--ease), color .2s var(--ease); }
+a.alert-text:hover { border-bottom-color: var(--alert-accent, var(--gold)); color: #fff; }
+
+.alert-count {
+  flex: none; font-size: .7rem; letter-spacing: .1em;
+  color: rgba(255,255,255,.42); font-variant-numeric: tabular-nums;
+}
+.alert-close {
+  flex: none; width: 28px; height: 28px; border-radius: 8px;
+  display: grid; place-items: center; color: rgba(255,255,255,.55);
+  transition: background .2s var(--ease), color .2s var(--ease);
+}
+.alert-close:hover { background: rgba(255,255,255,.12); color: var(--white); }
+
+.alert-bar[data-level="info"]   { --alert-accent: #6fb2ff; }
+.alert-bar[data-level="warn"]   { --alert-accent: var(--gold-bright); }
+.alert-bar[data-level="urgent"] { --alert-accent: #ff7b7b; }
+
+@keyframes alert-pulse {
+  0%   { box-shadow: 0 0 0 0   currentColor; opacity: 1; }
+  70%  { box-shadow: 0 0 0 6px transparent;  opacity: .75; }
+  100% { box-shadow: 0 0 0 0   transparent;  opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .alert-bar { transition: none; }
+  .alert-chip::before { animation: none; }
+}
+@media (max-width: 720px) {
+  .alert-bar { top: calc(var(--nav-h) + 8px); }
+  .alert-inner { align-items: flex-start; gap: 10px; padding: 10px 8px 10px 13px; border-radius: 12px; }
+  .alert-slot { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .alert-text { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; font-size: .84rem; }
+  .alert-chip { font-size: .6rem; padding: 3px 8px; }
+}
+
+/* A live notice would otherwise sit on top of the hero eyebrow. Push the hero
+   content down by the card's height instead, so the two never collide. The
+   shift happens once, as the card slides in, and reads as part of that. */
+.has-alert .hero-inner { padding-top: 64px; }
+.has-alert .inner-hero { padding-top: 204px; }
+.has-alert .page-hero  { padding-top: calc(var(--nav-h) + 72px + 64px); }
+@media (max-width: 720px) {
+  .has-alert .hero-inner { padding-top: 92px; }
+  .has-alert .inner-hero { padding-top: 232px; }
+  .has-alert .page-hero  { padding-top: calc(var(--nav-h) + 72px + 92px); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-inner, .inner-hero, .page-hero { transition: padding-top .5s var(--ease); }
+}
+
+/* ---------- Keyboard access ---------- */
+
+/* Tabbing to something just below the fold scrolled it flush to the top of the
+   viewport, i.e. underneath the fixed header — measured landing at 17px against
+   an 82px header. This reserves the header's height for focus scrolling and
+   anchor jumps alike. */
+html { scroll-padding-top: calc(var(--nav-h) + 18px); }
+.has-alert html, html.has-alert { scroll-padding-top: calc(var(--nav-h) + 82px); }
+
+/* Every page put the seven nav links ahead of the content, so reaching the page
+   itself took at least eight tab stops. */
+.skip-link {
+  position: fixed; top: 10px; left: 10px; z-index: 100;
+  transform: translateY(-160%);
+  background: var(--gold); color: var(--ink-deep);
+  font-family: var(--font-display); font-weight: 700; font-size: .92rem;
+  padding: 12px 20px; border-radius: 999px;
+  box-shadow: var(--shadow);
+  transition: transform .22s var(--ease);
+}
+.skip-link:focus { transform: none; outline: 3px solid var(--ink-deep); outline-offset: 2px; }
+#main:focus { outline: none; }   /* it is a scroll target, not a control */
+
+/* The browser default ring is near-black, which is fine on the light pages and
+   weak on the navy ones. Set it explicitly in both directions instead of
+   depending on each browser's adaptive default. */
+:focus-visible {
+  outline: 3px solid var(--ink-deep);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+.hero :focus-visible,
+.inner-hero :focus-visible,
+.page-hero :focus-visible,
+.cta-band :focus-visible,
+.site-footer :focus-visible,
+.alert-bar :focus-visible,
+.fab-stack :focus-visible,
+.service-card.featured:focus-visible,
+.site-header:not(.is-solid) :focus-visible {
+  outline-color: var(--gold-bright);
+}
