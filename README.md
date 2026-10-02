@@ -14,24 +14,28 @@ A modern, handcrafted static website for **Mozumder** — a diversified logistic
 
 ```
 .
-├── index.html              # Home
-├── about.html              # About + Welcome + Mission & Vision
-├── services.html           # What we offer
-├── fleet.html              # Product line / fleet
-├── sister-concerns.html    # Six sister concerns
-├── partners.html           # Corporate partners
-├── contact.html            # Offices + enquiry form
+├── index.html              # Home — scroll-driven film + 3D network map
+├── about.html, services.html, fleet.html, sister-concerns.html,
+│   partners.html, contact.html
 ├── 404.html
-├── next/                  # UI test environment (copy of the site, noindex) — see next/README.md
-├── css/main.css            # Design system + all components
-├── js/main.js              # Nav, reveal animations, count-up, form
-├── assets/                 # logo, favicon, icons, partners
-├── robots.txt
-├── sitemap.xml
-├── render.yaml             # Render deploy config (free)
-├── .nojekyll               # GH Pages: serve files as-is
+├── css/                    # main.css (design system), enhance*.css,
+│                           # home.css (homepage film), pages.css (photo
+│                           # headers), fleet-motion.css (fleet cards)
+├── js/                     # main.js, enhance*.js (incl. EN/বাং toggle),
+│                           # i18n-bn.js (Bangla text), home/ (film + map),
+│                           # fleet-motion.js, pages.js, alerts.js, places.js
+├── media/                  # compressed web footage (home/, pages/, fleet/)
+├── vendor/three/           # Three.js r186 (for the 3D map)
+├── tools/i18n_annotate.py  # keeps the Bangla toggle in sync with page text
+├── data/alerts.json        # operational notices strip
+├── assets/                 # logo, favicon, icons, partner logos
+├── old/                    # previous site design, kept as a backup (noindex)
+├── next/                   # redirects from the old /next/ test links
+├── robots.txt, sitemap.xml, CNAME, render.yaml, .nojekyll
 └── .github/workflows/deploy.yml   # GH Pages auto-deploy
 ```
+
+The raw AI footage the media was made from lives on the `media-raw` branch.
 
 ## Local preview
 
@@ -112,3 +116,45 @@ Content copy was adapted from the Mozumder profile (2025) including:
 Mozumder content and branding are property of Mozumder.
 The website template code may be modified freely for the company&rsquo;s
 own use.
+
+## Media
+
+`media/fleet/` holds the fleet card videos: a seamless-loop MP4 (H.264) and
+WebM (VP9) per vehicle at 960px, plus a JPG still. They were made from the
+raw AI renders on the `media-raw` branch (the last 0.8s of each clip is
+cross-faded into the first so it loops without a jump). `js/fleet-motion.js`
+attaches them to the cards; the animated line drawings stay as the fallback.
+
+`media/home/` holds the homepage footage, made from the `reference` renders on
+`media-raw`:
+
+- `hero`, `port`, `road`, `hub` — seamless-loop MP4s: `-lg` (1280px
+  landscape) and, except `hub`, `-pt` (608×1080 portrait cut at the source's
+  full resolution, centred on the subject) for phones held upright, plus a
+  JPG poster each.
+- `seq/sea`, `seq/handoff`, `seq/rise` — 72-frame WebP sequences (`lg`
+  landscape / `pt` portrait) that scrub with the scroll position.
+
+## Homepage
+
+`index.html` is a scroll-driven film. `js/home/home.js` keeps a fixed stage of
+media layers behind the chapter sections and crossfades them as you scroll;
+`js/home/network-map.js` is the Three.js map of Bangladesh that takes over at
+the end of the drone rise. Three.js r186 is vendored in `vendor/three/`.
+
+## Bangla (EN / বাং toggle)
+
+Every visible text block on these pages carries `data-i18n-auto="<key>"`,
+where the key is a hash of its English HTML. `js/i18n-bn.js` maps keys to
+Bangla HTML; `js/enhance-v2.js` swaps them in on বাং and restores the
+original English on EN. (Short UI strings — nav, hero, quote form — still use
+the older `data-i18n` dictionary inside `enhance-v2.js`.)
+
+After editing English text on a page:
+
+    python3 tools/i18n_annotate.py --write
+
+It re-keys changed blocks, rewrites `tools/i18n-en.json` (key → English) and
+reports how many keys lack Bangla. Add those to `js/i18n-bn.js`; until then
+the changed block simply shows in English. Client brand names on the
+Partners page are intentionally left in English.
