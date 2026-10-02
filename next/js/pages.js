@@ -6,11 +6,12 @@
   if (!hero) return;
   var media = hero.querySelector(".hero-media");
   var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var small = window.matchMedia && window.matchMedia("(max-width: 760px)").matches;
+  var portrait = window.matchMedia && window.matchMedia("(orientation: portrait) and (max-width: 1024px)").matches;
 
   var v = media && media.querySelector("video");
+  if (v && portrait) v.poster = v.getAttribute("poster").replace(/\.jpg$/, "-pt.jpg");
   if (v && !still) {
-    v.src = v.getAttribute(small ? "data-src-sm" : "data-src-lg");
+    v.src = v.getAttribute(portrait ? "data-src-pt" : "data-src-lg");
     v.load();
     var go = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
     v.addEventListener("canplay", go, { once: true });
