@@ -17,3 +17,11 @@ When it's approved, copy the `next/` HTML, `css/` and `js/` over the root
 files. Change `../assets/` back to `assets/`, change `../data/alerts.json`
 back to `data/alerts.json`, and remove the `robots` noindex meta tag. Then
 delete `next/` and the `Disallow: /next/` line in `robots.txt`.
+
+## Media
+
+`media/fleet/` holds the fleet card videos: a seamless-loop MP4 (H.264) and
+WebM (VP9) per vehicle at 960px, plus a JPG still. They were made from the
+raw AI renders on the `media-raw` branch (the last 0.8s of each clip is
+cross-faded into the first so it loops without a jump). `js/fleet-motion.js`
+attaches them to the cards; the animated line drawings stay as the fallback.

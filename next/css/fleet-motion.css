@@ -7,6 +7,18 @@
 .fleet-card .fimg svg { width: 100%; height: 100%; transition: transform .6s var(--ease); }
 .fleet-card:hover .fimg svg { transform: scale(1.06); }
 
+/* Studio video layer (added by fleet-motion.js). The card switches to the
+   video's 16:9 frame; the line drawing stays underneath until the first
+   frame is ready, and remains as the fallback if the video fails. */
+.fleet-card .fimg.has-video { aspect-ratio: 16 / 9; padding: 5% 14%; position: relative; }
+.fleet-card .fimg video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0;
+  transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+.fleet-card .fimg.video-ready video { opacity: 1; }
+.fleet-card:hover .fimg video { transform: scale(1.04); }
+
 /* Off-screen cards pause (fleet-motion.js toggles .is-live). */
 .fx-managed .fleet-card:not(.is-live) .fx * { animation-play-state: paused; }
 
