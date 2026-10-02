@@ -242,3 +242,15 @@ html:not(.in-cinema) .chapter-rail { opacity: 0; pointer-events: none; }
   .ch-hero h1 .line > span, .ch-hero .lead, .ch-hero .eyebrow, .hero-ctas, .hero-stats { animation: none; }
   .panel { transition: none; opacity: 1; transform: none; }
 }
+
+/* ---------- Phones: cheaper effects, same look ----------
+   Frosted-glass blur over moving video and the full-screen grain layer are
+   expensive on mobile GPUs; use a solid translucent card and drop the grain. */
+@media (max-width: 760px), (pointer: coarse) {
+  .stage-grain { display: none; }
+  .panel {
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+    background: linear-gradient(160deg, rgba(10,24,58,.9), rgba(4,10,26,.88));
+  }
+  .hub-label .hl { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(4,10,26,.85); }
+}

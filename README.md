@@ -158,3 +158,19 @@ It re-keys changed blocks, rewrites `tools/i18n-en.json` (key → English) and
 reports how many keys lack Bangla. Add those to `js/i18n-bn.js`; until then
 the changed block simply shows in English. Client brand names on the
 Partners page are intentionally left in English.
+
+## Performance
+
+- **Load order:** posters first; videos once the page has loaded and the
+  browser is idle; scroll-scene frames only after the visitor starts
+  scrolling.
+- **Formats:** each video has an AV1 twin (`*.av1.mp4`, 25–70% smaller),
+  used where the device decodes AV1 efficiently; H.264 otherwise. Scroll
+  frames ship as AVIF with WebP fallback.
+- **Slow connections:** on Data Saver, 2G or 3G, stills replace video and the
+  scroll scenes load at reduced frame density.
+- **Fonts:** self-hosted in `assets/fonts/` (see `css/fonts.css`); the
+  first-screen weights are preloaded.
+- **Engine:** the scroll engine runs only while something is moving, using
+  cached layout. Phones get solid cards instead of the frosted blur, and no
+  film grain.
