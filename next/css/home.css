@@ -92,6 +92,7 @@ html.cinema-on, html.cinema-on body { background: #040a1a; }
 .ch-hero .lead {
   color: rgba(255,255,255,.84); max-width: 560px; font-size: 1.08rem;
   animation: fade-up 1s .45s cubic-bezier(.2,.8,.2,1) both;
+  text-shadow: 0 1px 14px rgba(2,6,18,.75), 0 0 2px rgba(2,6,18,.5);   /* stays legible over sun glitter */
 }
 .ch-hero .eyebrow { animation: fade-up .9s .05s both; }
 .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; animation: fade-up 1s .6s both; }

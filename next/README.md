@@ -42,3 +42,20 @@ attaches them to the cards; the animated line drawings stay as the fallback.
 media layers behind the chapter sections and crossfades them as you scroll;
 `js/home/network-map.js` is the Three.js map of Bangladesh that takes over at
 the end of the drone rise. Three.js r186 is vendored in `vendor/three/`.
+
+## Bangla (EN / বাং toggle)
+
+Every visible text block on these pages carries `data-i18n-auto="<key>"`,
+where the key is a hash of its English HTML. `js/i18n-bn.js` maps keys to
+Bangla HTML; `js/enhance-v2.js` swaps them in on বাং and restores the
+original English on EN. (Short UI strings — nav, hero, quote form — still use
+the older `data-i18n` dictionary inside `enhance-v2.js`.)
+
+After editing English text on a page:
+
+    cd next && python3 tools/i18n_annotate.py --write
+
+It re-keys changed blocks, rewrites `tools/i18n-en.json` (key → English) and
+reports how many keys lack Bangla. Add those to `js/i18n-bn.js`; until then
+the changed block simply shows in English. Client brand names on the
+Partners page are intentionally left in English.

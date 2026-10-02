@@ -104,6 +104,23 @@ body.lang-bn {
   --font-body-override: "Noto Sans Bengali", "Hind Siliguri", var(--font-body, system-ui);
 }
 body.lang-bn [data-i18n] { font-family: var(--font-body-override); }
+/* Bangla everywhere: Latin glyphs (numbers, brand names) keep the site's
+   fonts and Bangla glyphs fall through to Noto Sans Bengali. Letter-spacing
+   is removed because tracking breaks Bangla conjuncts, and tight display
+   line-heights are opened up for the taller script. */
+body.lang-bn { font-family: "Inter", "Noto Sans Bengali", system-ui, sans-serif; }
+body.lang-bn :is(h1, h2, h3, h4, h5, h6, .btn, .eyebrow, .ch-num, b, strong, .brand) {
+  font-family: "Manrope", "Noto Sans Bengali", system-ui, sans-serif;
+}
+body.lang-bn * { letter-spacing: 0 !important; }
+body.lang-bn :is(.eyebrow, .ch-num, .chapter-rail a, .scroll-cue, .hub-label span) { text-transform: none; }
+body.lang-bn :is(h1, h2, h3) { line-height: 1.28; }
+body.lang-bn :is(h4, h5) { line-height: 1.35; }
+body.lang-bn p, body.lang-bn li { line-height: 1.8; }
+/* Bangla reads smaller than Latin at the same size: nudge everything up,
+   and give the tiny tracked-caps labels a readable size. */
+html[lang="bn"] { font-size: 106.25%; }
+body.lang-bn :is(.eyebrow, .ch-num, .chapter-rail a, .scroll-cue, .crumbs, .fbody span, .cc-meta span, .svc-num) { font-size: .9rem; }
 body.lang-bn h1[data-i18n],
 body.lang-bn h2[data-i18n],
 body.lang-bn h3[data-i18n],
