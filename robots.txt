@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /next/
 
 Sitemap: https://www.mozumderbd.net/sitemap.xml
